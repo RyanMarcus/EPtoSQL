@@ -246,14 +246,69 @@ public class CharacterInputStreamStack implements Deque<Character> {
 
 	@Override
 	public Iterator<Character> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new CharacterInputStreamStackIterator(this);
 	}
 
 	@Override
 	public Iterator<Character> descendingIterator() {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
+	}
+	
+	private class CharacterInputStreamStackIterator implements Iterator<Character> {
+
+		private CharacterInputStreamStack ciss;
+		private int position = 0;
+		
+		private CharacterInputStreamStackIterator(CharacterInputStreamStack ciss) {
+			this.ciss = ciss;
+		}
+		
+		private Character getItemAtPosition(int p) {
+			if (p == 0)
+				return (ciss.isEmpty() ? null : ciss.peek());
+			
+			Deque<Character> buf = new LinkedList<Character>();
+			for (int i = 0; i <= p; i++) {
+				if (!ciss.isEmpty()) {
+					buf.push(ciss.pop());
+				} else {
+					// return items to the CISS
+					while (!buf.isEmpty()) {
+						ciss.push(buf.pop());
+					}
+					return null;
+				}
+			}
+	
+			
+			Character toR = buf.peek();
+			
+			// return items to the CISS
+			while (!buf.isEmpty()) {
+				ciss.push(buf.pop());
+			}
+			return toR;
+		}
+		
+		@Override
+		public boolean hasNext() {
+			return getItemAtPosition(position) != null;
+		}
+
+		@Override
+		public Character next() {
+			Character toR = getItemAtPosition(position);
+			position++;
+			return toR;
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack iterator");
+			
+		}
+		
 	}
 
 }

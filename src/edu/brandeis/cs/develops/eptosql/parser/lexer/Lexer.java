@@ -1,8 +1,11 @@
 package edu.brandeis.cs.develops.eptosql.parser.lexer;
 
+import java.io.InputStream;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import edu.brandeis.cs.develops.eptosql.parser.lexer.util.CharacterInputStreamStack;
 
 public class Lexer implements Iterator<Token> {
 
@@ -13,8 +16,16 @@ public class Lexer implements Iterator<Token> {
 		for (int i = 0; i < s.length(); i++)
 			charStack.add(s.charAt(i));
 	}
+	
+	private Lexer(InputStream s) {
+		charStack = new CharacterInputStreamStack(s);
+	}
 
 	public static Lexer createLexerForString(String s) {
+		return new Lexer(s);
+	}
+	
+	public static Lexer createLexerForInputStream(InputStream s) {
 		return new Lexer(s);
 	}
 
@@ -79,11 +90,10 @@ public class Lexer implements Iterator<Token> {
 	}
 
 	private boolean checkStackForKeyword(String keyword) {
-		if (keyword.length() > charStack.size())
-			return false;
-
 		Iterator<Character> it = charStack.iterator();
 		for (int i = 0; i < keyword.length(); i++) {
+			if (!it.hasNext())
+				return false;
 			if (keyword.charAt(i) != it.next()) {
 				return false;
 			}
