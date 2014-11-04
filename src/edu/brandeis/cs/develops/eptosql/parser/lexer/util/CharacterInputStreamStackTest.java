@@ -44,6 +44,7 @@ public class CharacterInputStreamStackTest {
 		assertTrue(ciss.pop() == 'l');
 
 		assertTrue(ciss.pop() == 'i');
+		assertFalse(ciss.isEmpty());
 
 
 		
