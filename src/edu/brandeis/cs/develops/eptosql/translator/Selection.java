@@ -1,19 +1,19 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
-public class Selection {
-	private Table child;
+public class Selection extends Relation{
+	private Relation leftChild;
 	private String predicate;
-	public Selection(Table child, String predicate) {
-		this.setChild(child);
+	public Selection(Relation leftChild, String predicate) {
+		this.setChild(leftChild);
 		this.setPredicate(predicate);
 	}
 	
-	public Table getChild() {
-		return child;
+	public Relation getChild() {
+		return leftChild;
 	}
 	
-	public void setChild(Table child) {
-		this.child = child;
+	public void setChild(Relation leftChild) {
+		this.leftChild = leftChild;
 	}
 	
 	public String getPredicate() {

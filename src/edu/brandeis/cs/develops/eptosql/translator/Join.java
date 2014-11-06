@@ -1,31 +1,31 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
 public class Join extends Relation {
-	private Table leftChild;
-	private Table rightChild;
+	private Relation leftChild;
+	private Relation rightChild;
 	private String predicate;
 	private String joinType;
 	
-	public Join(Table leftChild, Table rightChild, String predicate, String joinType) {
+	public Join(Relation leftChild, Relation rightChild, String predicate, String joinType) {
 		this.setLeftChild(leftChild);
 		this.setRightChild(rightChild);
 		this.setPredicate(predicate);
 		this.setJoinType(joinType);
 	}
 
-	public Table getLeftChild() {
+	public Relation getLeftChild() {
 		return leftChild;
 	}
 
-	public void setLeftChild(Table leftChild) {
+	public void setLeftChild(Relation leftChild) {
 		this.leftChild = leftChild;
 	}
 
-	public Table getRightChild() {
+	public Relation getRightChild() {
 		return rightChild;
 	}
 
-	public void setRightChild(Table rightChild) {
+	public void setRightChild(Relation rightChild) {
 		this.rightChild = rightChild;
 	}
 
