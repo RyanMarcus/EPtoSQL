@@ -1,6 +1,6 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
-public class Join implements Relation {
+public class Join extends Relation {
 	private Table leftChild;
 	private Table rightChild;
 	private String predicate;

@@ -1,6 +1,6 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
-public class Table implements Relation {
+public class Table extends Relation {
 	private String name;
 	
 	public Table(String name) {
