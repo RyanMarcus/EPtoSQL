@@ -6,4 +6,10 @@ public class SELECTION extends ASTNode {
 	public SELECTION() {
 		super(null);
 	}
+	public String getPredicate() {
+		return paren_string_expr.string;
+	}
+	public EXPR getBaseEXPR() {
+		return paren_string_expr.getExpr().getExpr();
+	}
 }

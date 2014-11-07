@@ -23,4 +23,8 @@ public class Selection extends Relation{
 	public void setPredicate(String predicate) {
 		this.predicate = predicate;
 	}
+	
+	public String toString() {
+		return "Select " + this.getPredicate() + " from " + this.getChild().toString();
+	}
 }

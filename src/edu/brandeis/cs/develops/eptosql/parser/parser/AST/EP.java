@@ -6,4 +6,7 @@ public class EP extends ASTNode {
 	public EP() {
 		super(null);
 	}
+	public EXPR getExpr() {
+		return expr;
+	}
 }

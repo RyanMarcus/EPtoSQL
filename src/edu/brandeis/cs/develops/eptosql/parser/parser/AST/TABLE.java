@@ -6,4 +6,8 @@ public class TABLE extends ASTNode {
 	public TABLE() {
 		super(null);
 	}
+	
+	public String getName() {
+		return paren_string.string;
+	}
 }

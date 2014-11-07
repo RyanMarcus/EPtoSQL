@@ -44,4 +44,8 @@ public class Join extends Relation {
 	public void setJoinType(String joinType) {
 		this.joinType = joinType;
 	}
+	
+	public String toString() {
+		return this.getLeftChild().toString() + " " + this.getJoinType() + " " + this.getRightChild().toString() + " on " + this.getPredicate();
+	}
 }

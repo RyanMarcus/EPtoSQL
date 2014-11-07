@@ -7,5 +7,9 @@ public class COMMA_EXPR extends ASTNode {
 	public COMMA_EXPR() {
 		super(null);
 	}
+	
+	public EXPR getExpr() {
+		return expr;
+	}
 
 }

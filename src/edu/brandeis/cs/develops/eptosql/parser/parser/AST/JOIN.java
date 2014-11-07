@@ -7,4 +7,17 @@ public class JOIN extends ASTNode {
 	public JOIN() {
 		super(null);
 	}
+	
+	public EXPR getExpr1() {
+		return paren_string_expr_expr.getSubExpr1();
+	}
+	public EXPR getExpr2() {
+		return paren_string_expr_expr.getSubExpr2();
+	}
+	public String getType() {
+		return join_type.type;
+	}
+	public String getPredicate() {
+		return paren_string_expr_expr.string;
+	}
 }

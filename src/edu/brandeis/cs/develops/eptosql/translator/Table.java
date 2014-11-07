@@ -14,4 +14,8 @@ public class Table extends Relation {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String toString() {
+		return "Table" + this.name;
+	}
 }

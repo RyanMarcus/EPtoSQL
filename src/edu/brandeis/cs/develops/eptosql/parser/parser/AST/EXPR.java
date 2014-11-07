@@ -8,4 +8,22 @@ public class EXPR extends ASTNode {
 	public EXPR() {
 		super(null);
 	}
+	public Boolean isSelection() {
+		return selection!=null;
+	}
+	public Boolean isJoin() {
+		return join!=null;
+	}
+	public Boolean isTable() {
+		return table!=null;
+	}
+	public SELECTION getSelection() {
+		return selection;
+	}
+	public JOIN getJoin() {
+		return join;
+	}
+	public TABLE getTable() {
+		return table;
+	}
 }

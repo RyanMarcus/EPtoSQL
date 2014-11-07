@@ -7,4 +7,8 @@ public class PAREN_STRING_EXPR extends ASTNode {
 	public PAREN_STRING_EXPR() {
 		super(null);
 	}
+	
+	public COMMA_EXPR getExpr() {
+		return expr;
+	}
 }
