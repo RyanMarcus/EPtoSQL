@@ -24,6 +24,10 @@ public class Selection extends Relation{
 		this.predicate = predicate;
 	}
 	
+	public Boolean hasAttributes(String predicate) {
+		return this.predicate.equals(predicate);
+	}
+	
 	public String toString() {
 		return "Select " + this.getPredicate() + " from " + this.getChild().toString();
 	}

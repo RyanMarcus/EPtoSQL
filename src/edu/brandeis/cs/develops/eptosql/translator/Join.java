@@ -51,6 +51,10 @@ public class Join extends Relation {
 		}
 	}
 	
+	public Boolean hasAttributes(JoinType joinType, String predicate) {
+		return this.joinType==joinType && this.predicate.equals(predicate);
+	}
+	
 	public String toString() {
 		return this.getLeftChild().toString() + " " + this.getJoinType() + " " + this.getRightChild().toString() + " on " + this.getPredicate();
 	}

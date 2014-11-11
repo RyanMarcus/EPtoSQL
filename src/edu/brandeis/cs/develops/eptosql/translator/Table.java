@@ -15,6 +15,10 @@ public class Table extends Relation {
 		this.name = name;
 	}
 	
+	public Boolean hasAttributes(String name) {
+		return this.name.equals(name);
+	}
+	
 	public String toString() {
 		return "Table" + this.name;
 	}
