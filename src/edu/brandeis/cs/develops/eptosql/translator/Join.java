@@ -4,7 +4,7 @@ public class Join extends Relation {
 	private Relation leftChild;
 	private Relation rightChild;
 	private String predicate;
-	private String joinType;
+	private JoinType joinType;
 	
 	public Join(Relation leftChild, Relation rightChild, String predicate, String joinType) {
 		this.setLeftChild(leftChild);
@@ -37,12 +37,18 @@ public class Join extends Relation {
 		this.predicate = predicate;
 	}
 
-	public String getJoinType() {
+	public JoinType getJoinType() {
 		return joinType;
 	}
 
 	public void setJoinType(String joinType) {
-		this.joinType = joinType;
+		if(joinType.equals("PMJOIN")) {
+			this.joinType = JoinType.PMJOIN;
+		} else if(joinType.equals("PNLJOIN")) {
+			this.joinType = JoinType.PNLJOIN;
+		} else if(joinType.equals("PHJOIN")) {
+			this.joinType.equals("PHJOIN");
+		}
 	}
 	
 	public String toString() {

@@ -3,15 +3,15 @@ package edu.brandeis.cs.develops.eptosql.translator;
 import edu.brandeis.cs.develops.eptosql.parser.*;
 import edu.brandeis.cs.develops.eptosql.parser.parser.AST.EP;
 
-public class Translator {
+public class TranslatorTest {
 	private Parser p;
-	private ASLParser aslp;
-	public Translator() {
+	private ASTTranslator aslp;
+	public TranslatorTest() {
 		p = new Parser();
-		aslp = new ASLParser();
+		aslp = new ASTTranslator();
 	}
 	public static void main(String[] args) {
-		Translator t = new Translator();
+		TranslatorTest t = new TranslatorTest();
 		System.out.println(t.test().toString());
 		System.out.println(t.test2().toString());
 		System.out.println(t.test3().toString());
