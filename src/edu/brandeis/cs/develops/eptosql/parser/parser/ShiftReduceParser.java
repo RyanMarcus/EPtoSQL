@@ -46,7 +46,7 @@ public class ShiftReduceParser {
 		stack = new LinkedList<ASTNode>();
 	}
 
-	public ASTNode parseTokens(Iterator<Token> tokens) {
+	public ASTNode parseTokens(Iterator<Token> tokens) throws ParserException {
 		stack = new LinkedList<ASTNode>();
 		while (tokens.hasNext()) {
 			stack.push(shift(tokens.next()));
@@ -55,6 +55,9 @@ public class ShiftReduceParser {
 				//System.out.println(stack);
 			}
 		}
+		
+		if (stack.size() != 1)
+			throw new ParserException("More than one element remaining on the stack: " + stack.toString());
 		
 		return stack.pop();
 	}
@@ -197,7 +200,7 @@ public class ShiftReduceParser {
 		return new ASTNode(next);
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParserException {
 		ShiftReduceParser p = new ShiftReduceParser();
 		p.parseTokens(Lexer.createLexerForString("PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S))"));
 	}

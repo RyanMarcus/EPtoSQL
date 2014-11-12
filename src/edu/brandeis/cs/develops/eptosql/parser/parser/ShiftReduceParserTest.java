@@ -22,20 +22,20 @@ public class ShiftReduceParserTest {
 	}
 
 	@Test
-	public void test() {
+	public void test() throws ParserException {
 		EP ep = (EP) p.parseTokens(Lexer.createLexerForString("PTABLE(PS)"));
 		assertTrue(ep.expr.table.paren_string.string.equals("PS"));
 	}
 	
 	@Test
-	public void test2() {
+	public void test2() throws ParserException {
 		EP ep = (EP) p.parseTokens(Lexer.createLexerForString("PSELECT(n_name = 'ASIA', PTABLE(N))"));
 		assertTrue(ep.expr.selection.paren_string_expr.string.equals("n_name = 'ASIA'"));
 		assertTrue(ep.expr.selection.paren_string_expr.expr.expr.table.paren_string.string.equals("N"));
 	}
 	
 	@Test
-	public void test3() {
+	public void test3() throws ParserException {
 		EP ep = (EP) p.parseTokens(Lexer.createLexerForString("PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S))"));
 		assertTrue(ep.expr.join.join_type.type.equals("PMJOIN"));
 		assertTrue(ep.expr.join.paren_string_expr_expr.string.equals("ps_suppkey = s_suppkey"));
@@ -44,7 +44,7 @@ public class ShiftReduceParserTest {
 	}
 	
 	@Test
-	public void test4() {
+	public void test4() throws ParserException {
 		EP ep = (EP) p.parseTokens(Lexer.createLexerForString("PNLJOIN(s_nationkey = n_nationkey, PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S)), PSELECT(n_name = 'ASIA', PTABLE(N)))"));
 		assertTrue(ep.expr.join.join_type.type.equals("PNLJOIN"));
 		assertTrue(ep.expr.join.paren_string_expr_expr.string.equals("s_nationkey = n_nationkey"));

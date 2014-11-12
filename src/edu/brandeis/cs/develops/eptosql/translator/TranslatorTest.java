@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.brandeis.cs.develops.eptosql.parser.*;
+import edu.brandeis.cs.develops.eptosql.parser.parser.ParserException;
 import edu.brandeis.cs.develops.eptosql.parser.parser.AST.EP;
 
 public class TranslatorTest {
@@ -18,7 +19,7 @@ public class TranslatorTest {
 		astt = new ASTTranslator();
 	}
 	@Test
-	public void test() {
+	public void test() throws ParserException {
 		EP ep = (EP) p.parseString("PTABLE(PS)");
 		Relation r = astt.parse(ep);
 		assertTrue(r instanceof Table);
@@ -26,7 +27,7 @@ public class TranslatorTest {
 		assertTrue(rt.hasAttributes("PS"));
 	}
 	@Test
-	public void test2() {
+	public void test2() throws ParserException {
 		EP ep = (EP) p.parseString("PSELECT(n_name = 'ASIA', PTABLE(N))");
 		Relation r = astt.parse(ep);
 		assertTrue(r instanceof Selection);
@@ -36,7 +37,7 @@ public class TranslatorTest {
 		assertTrue(((Table)rs.getChild()).hasAttributes("N"));
 	}
 	@Test
-	public void test3() {
+	public void test3() throws ParserException {
 		EP ep = (EP) p.parseString("PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S))");
 		Relation r = astt.parse(ep);
 		assertTrue(r instanceof Join);
@@ -50,7 +51,7 @@ public class TranslatorTest {
 		assertTrue(rightChild.hasAttributes("S"));
 	}
 	@Test
-	public void test4() {
+	public void test4() throws ParserException {
 		EP ep = (EP) p.parseString("PNLJOIN(s_nationkey = n_nationkey, PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S)), PSELECT(n_name = 'ASIA', PTABLE(N)))");
 		Relation r = astt.parse(ep);
 		assertTrue(r instanceof Join);
