@@ -81,6 +81,12 @@ public class ShiftReduceParserTest {
 		p.parseTokens(Lexer.createLexerForString("#@#$@#sdfasdf@#RASDfsdfawef"));
 	}
 	
+	@Test(expected=ParserException.class)
+	public void invalidTest5() throws ParserException {
+		// join on only one table
+		p.parseTokens(Lexer.createLexerForString("PNLJOIN(s_nationkey = n_nationkey, PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS)), PSELECT(n_name = 'ASIA', PTABLE(N)))"));
+	}
+	
 	
 
 }

@@ -65,7 +65,7 @@ public class ShiftReduceParser {
 		return stack.pop();
 	}
 
-	private boolean reduce() {
+	private boolean reduce() throws ParserException {
 		ASTNode lookahead = stack.pop();
 		if (lookahead.isTokenType(TokenType.RP)) {
 			// apply rule 11
@@ -82,6 +82,13 @@ public class ShiftReduceParser {
 			if (stack.peek() instanceof COMMA_EXPR) {
 				PAREN_STRING_EXPR toPush = new PAREN_STRING_EXPR();
 				toPush.expr = (COMMA_EXPR) stack.pop();
+				
+				if (stack.isEmpty()
+						|| stack.peek().getToken() == null
+						|| stack.peek().getToken().getType() != TokenType.STRING)
+					throw new ParserException("Expected string followed by comma expression");
+				
+				
 				toPush.string = stack.pop().getToken().getContent();
 				stack.pop(); // the LP
 				stack.push(toPush);
