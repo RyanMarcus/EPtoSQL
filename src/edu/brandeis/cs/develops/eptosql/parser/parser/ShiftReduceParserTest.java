@@ -53,7 +53,32 @@ public class ShiftReduceParserTest {
 		assertTrue(ep.expr.join.paren_string_expr_expr.double_comma_expr.expr1.expr.join.paren_string_expr_expr.double_comma_expr.expr2.expr.table.paren_string.string.equals("S"));
 		assertTrue(ep.expr.join.paren_string_expr_expr.double_comma_expr.expr2.expr.selection.paren_string_expr.string.equals("n_name = 'ASIA'"));
 		assertTrue(ep.expr.join.paren_string_expr_expr.double_comma_expr.expr2.expr.selection.paren_string_expr.expr.expr.table.paren_string.string.equals("N"));
+	}
+	
+	@Test(expected=ParserException.class)
+	public void invalidTest1() throws ParserException {
+		p.parseTokens(Lexer.createLexerForString("PNJOIN PMJOIN"));
 
+	}
+	
+	
+	@Test(expected=ParserException.class)
+	public void invalidTest2() throws ParserException {
+		// missing paran at end
+		p.parseTokens(Lexer.createLexerForString("PNLJOIN(s_nationkey = n_nationkey, PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S)), PSELECT(n_name = 'ASIA', PTABLE(N))"));
+	}
+	
+	
+	@Test(expected=ParserException.class)
+	public void invalidTest3() throws ParserException {
+		// missing paran at end
+		p.parseTokens(Lexer.createLexerForString("random crap"));
+	}
+	
+	@Test(expected=ParserException.class)
+	public void invalidTest4() throws ParserException {
+		// missing paran at end
+		p.parseTokens(Lexer.createLexerForString("#@#$@#sdfasdf@#RASDfsdfawef"));
 	}
 	
 	

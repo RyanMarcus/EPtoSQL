@@ -59,6 +59,9 @@ public class ShiftReduceParser {
 		if (stack.size() != 1)
 			throw new ParserException("More than one element remaining on the stack: " + stack.toString());
 		
+		if (!(stack.peek() instanceof EP))
+			throw new ParserException("Item left on stack is not of proper type: " + stack.toString());
+		
 		return stack.pop();
 	}
 
