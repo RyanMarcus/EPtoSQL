@@ -47,7 +47,7 @@ public class Join extends Relation {
 		} else if(joinType.equals("PNLJOIN")) {
 			this.joinType = JoinType.PNLJOIN;
 		} else if(joinType.equals("PHJOIN")) {
-			this.joinType.equals("PHJOIN");
+			this.joinType = JoinType.PHJOIN;
 		}
 	}
 	
