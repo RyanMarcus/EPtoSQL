@@ -44,9 +44,9 @@ public class SQLGenerator {
     private static SQLDto unnestedSQL(Join relation) {
         SQLDto leftDto = unnestedSQL(relation.getLeftChild());
         SQLDto rightDto = unnestedSQL(relation.getRightChild());
-        if (leftDto.getJoinClause().length() == 0) {
+        if (relation.getLeftChild() instanceof Table) {
             return easyJoin(relation, leftDto, rightDto);
-        } else if (rightDto.getJoinClause().length() == 0) {
+        } else if (relation.getRightChild() instanceof Table) {
             return easyJoin(relation, rightDto, leftDto);
         } else {
             leftDto.appendJoin(" ");
@@ -102,13 +102,19 @@ public class SQLGenerator {
     }
 
     private static String nestedSQL(Join relation) {
-        String result = String.format("SELECT * FROM (%s) table_left %s (%s) table_right ON (%s)", nestedSQL(relation.getLeftChild()), evaluateJoinType(relation.getJoinType()), nestedSQL(relation.getRightChild()), relation.getPredicate());
-        return result;
+        if(relation.getLeftChild() instanceof Table && relation.getRightChild() instanceof Table){
+            return String.format("SELECT * FROM %s  %s %s table_right ON (%s)", ((Table) relation.getLeftChild()).getName(), evaluateJoinType(relation.getJoinType()), ((Table) relation.getRightChild()).getName(), relation.getPredicate());
+        }else{
+            return String.format("SELECT * FROM (%s) table_left %s (%s) table_right ON (%s)", nestedSQL(relation.getLeftChild()), evaluateJoinType(relation.getJoinType()), nestedSQL(relation.getRightChild()), relation.getPredicate());
+        }
     }
 
     private static String nestedSQL(Selection relation) {
-        String result = String.format("SELECT * FROM (%s) table_inner WHERE %s", nestedSQL(relation.getChild()), relation.getPredicate());
-        return result;
+        if(relation.getChild() instanceof Table){
+            return String.format("SELECT * FROM %s table_inner WHERE %s", ((Table) relation.getChild()).getName(), relation.getPredicate());
+        }else{
+            return String.format("SELECT * FROM (%s) table_inner WHERE %s", nestedSQL(relation.getChild()), relation.getPredicate());
+        }
     }
 
     private static String nestedSQL(Table relation) {
