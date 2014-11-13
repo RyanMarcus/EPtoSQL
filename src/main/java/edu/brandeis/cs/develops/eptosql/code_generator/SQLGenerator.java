@@ -2,18 +2,28 @@ package edu.brandeis.cs.develops.eptosql.code_generator;
 
 import edu.brandeis.cs.develops.eptosql.translator.Join;
 import edu.brandeis.cs.develops.eptosql.translator.JoinType;
-import static edu.brandeis.cs.develops.eptosql.translator.JoinType.PMJOIN;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
 import edu.brandeis.cs.develops.eptosql.translator.Selection;
 import edu.brandeis.cs.develops.eptosql.translator.Table;
 
 public class SQLGenerator {
 
+	
+	/**
+	 * Builds a collapsed query from the relation tree (use this one)
+	 * @param fullRelation the relation tree to build SQL for
+	 * @return the SQL
+	 */
     public static String createUnnestedSQL(Relation fullRelation) {
         SQLDto full = unnestedSQL(fullRelation);
         return String.format("%s OPTION(FORCE ORDER);", full.generateSQL());
     }
     
+    /**
+     * Builds an fully-expanded query from the relation tree
+     * @param fullRelation the relation tree to build SQL for
+     * @return the SQL
+     */
     public static String createNestedSQL(Relation fullRelation) {
         String sql = String.format("%s OPTION(FORCE ORDER);", nestedSQL(fullRelation));
         return sql;
