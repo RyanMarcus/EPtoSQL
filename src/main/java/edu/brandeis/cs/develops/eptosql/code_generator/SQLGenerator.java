@@ -102,7 +102,7 @@ public class SQLGenerator {
     }
 
     private static String nestedSQL(Join relation) {
-        String result = String.format("SELECT * FROM (%s) table_left %s JOIN (%s) table_right ON (%s)", nestedSQL(relation.getLeftChild()), evaluateJoinType(relation.getJoinType()), nestedSQL(relation.getRightChild()), relation.getPredicate());
+        String result = String.format("SELECT * FROM (%s) table_left %s (%s) table_right ON (%s)", nestedSQL(relation.getLeftChild()), evaluateJoinType(relation.getJoinType()), nestedSQL(relation.getRightChild()), relation.getPredicate());
         return result;
     }
 
