@@ -29,12 +29,10 @@ public class Lexer implements Iterator<Token> {
 		return new Lexer(s);
 	}
 
-	@Override
 	public boolean hasNext() {
 		return !charStack.isEmpty();
 	}
 
-	@Override
 	public Token next() {
 		churnWhitespace();
 		Token t = readNextToken();
@@ -66,7 +64,7 @@ public class Lexer implements Iterator<Token> {
 				return new Token(TokenType.PMJOIN);
 			} else if (checkStackForKeyword("NLJOIN")) {
 				return new Token(TokenType.PNLJOIN);
-			} else if (checkStackForKeyword("PHJOIN")) {
+			} else if (checkStackForKeyword("HJOIN")) {
 				return new Token(TokenType.PHJOIN);
 			}
 		}
@@ -106,7 +104,6 @@ public class Lexer implements Iterator<Token> {
 		return true;
 	}
 
-	@Override
 	public void remove() {
 		throw new UnsupportedOperationException("You cannot remove a token");
 	}
