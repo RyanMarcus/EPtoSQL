@@ -1,5 +1,9 @@
 package edu.brandeis.cs.develops.eptosql.parser.parser.AST;
 
+/**
+ * @author Ryan Marcus
+ * @since 11/17/2014
+ */
 public class JOIN extends ASTNode {
 	public PAREN_STRING_EXPR_EXPR paren_string_expr_expr;
 	public JOIN_TYPE join_type;

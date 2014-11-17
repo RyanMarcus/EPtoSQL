@@ -6,7 +6,11 @@ import edu.brandeis.cs.develops.eptosql.parser.lexer.Lexer;
 import edu.brandeis.cs.develops.eptosql.parser.parser.ParserException;
 import edu.brandeis.cs.develops.eptosql.parser.parser.ShiftReduceParser;
 import edu.brandeis.cs.develops.eptosql.parser.parser.AST.ASTNode;
-
+/**
+ * 
+ * @author Ryan Marcus
+ * @since 11/17/2014
+ */
 public class Parser {
 	public ASTNode parseString(String s) throws ParserException {
 		ShiftReduceParser srp = new ShiftReduceParser();

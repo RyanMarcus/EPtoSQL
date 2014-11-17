@@ -9,6 +9,11 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * 
+ * @author Ryan Marcus
+ * @since 11/17/2014
+ */
 public class CharacterInputStreamStack implements Deque<Character> {
 	
 	private BufferedReader br;

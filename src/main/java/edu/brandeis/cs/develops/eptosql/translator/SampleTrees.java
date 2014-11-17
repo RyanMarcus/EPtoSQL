@@ -1,36 +1,37 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
 /**
- * @author rachel
- *
+ * Sample Relation trees for use in building future sections of the program
+ * @author Rachel Leeman-Munk
+ * @since 11/17/2014
  */
 public class SampleTrees {
 	/**
-	 * @return
+	 * @return basic Join Relation
 	 */
 	public static Relation BasicJoinExpression() {
 		return new Join(new Table("t1"),new Table("t2"),"att1=att2","HashJoin");
 	}
 	/**
-	 * @return
+	 * @return basic Selection Relation
 	 */
 	public static Relation BasicSelectionExpression() {
 		return new Selection(new Table("t3"),"att2>10");
 	}
 	/**
-	 * @return
+	 * @return two Join Relation
 	 */
 	public static Relation TwoJoinExpression() {
 		return new Join(new Table("t4"), BasicJoinExpression(), "att3>att3", "MergeJoin");
 	}
 	/**
-	 * @return
+	 * @return Join of Table and Selection Relation
 	 */
 	public static Relation JoinSelectionExpression() {
 		return new Join(new Table("t5"), BasicSelectionExpression(), "att4=att4","HashJoin");
 	}
 	/**
-	 * @return
+	 * @return Two Join of Join and Selection Relation
 	 */
 	public static Relation TwoJoinSelectionExpression() {
 		return new Join(BasicJoinExpression(), BasicSelectionExpression(), "att5=att5", "MergeJoin");

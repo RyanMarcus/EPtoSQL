@@ -1,5 +1,10 @@
 package edu.brandeis.cs.develops.eptosql.parser.lexer;
 
+/**
+ * 
+ * @author Ryan Marcus
+ * @since 11/17/2014
+ */
 public class Token {
 	
 	public Token(TokenType t) {
