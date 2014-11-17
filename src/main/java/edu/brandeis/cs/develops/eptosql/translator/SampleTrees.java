@@ -37,11 +37,13 @@ public class SampleTrees {
 	}
         public static Relation EmployeeDepartmentExpression(){
             Relation employees = new Table("employees");
+            Relation employees_sel = new Selection(employees, "yee_employee_last_name='Dallas'");
             Relation employers = new Table("employers");
             Relation deparments = new Table("departments");
+            Relation deparments_sel = new Selection(deparments, "dep_department_id=1");
             Relation depToEmp = new Table("employees_to_department");
-            Relation emp_employees = new Join(employees, employers, "yee_employer_id=yer_employer_id", "PHJOIN");
-            Relation emp_dep = new Join(depToEmp, deparments, "dep_department_id=etd_department_id", "PHJOIN");
+            Relation emp_employees = new Join(employees_sel, employers, "yee_employer_id=yer_employer_id", "PHJOIN");
+            Relation emp_dep = new Join(depToEmp, deparments_sel, "dep_department_id=etd_department_id", "PNLJOIN");
             Relation full = new Join(emp_employees, emp_dep, "yee_employee_id=etd_employee_id", "PHJOIN");
             return full;
         }

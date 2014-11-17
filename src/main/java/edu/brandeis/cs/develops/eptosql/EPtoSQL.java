@@ -12,28 +12,26 @@ import edu.brandeis.cs.develops.eptosql.translator.Relation;
 
 public class EPtoSQL {
 
-	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		String plan = sc.nextLine().trim();		
-		
-		try {
-			Parser p = new Parser();
-			ASTNode n = p.parseString(plan);
-			ASTTranslator t = new ASTTranslator();
-			Relation r = t.parse((EP) n);
-			System.out.println(SQLGenerator.createUnnestedSQL(r));
-			
-		} catch (ParserException e) {
-			System.err.println("Parser exception: " + e.getMessage());
-			e.printStackTrace();
-			System.exit(1);
-		} finally {
-			sc.close();
+		String plan;
+		while ((plan = sc.nextLine()) != null) {
+			try {
+				Parser p = new Parser();
+				ASTNode n = p.parseString(plan);
+				ASTTranslator t = new ASTTranslator();
+				Relation r = t.parse((EP) n);
+				System.out.println(SQLGenerator.createUnnestedSQL(r));
+
+			} catch (ParserException e) {
+				System.err.println("Parser exception: " + e.getMessage());
+				e.printStackTrace();
+				System.exit(1);
+			}
 		}
-		
-		
-		
+
+		sc.close();
+
 	}
 
 }
