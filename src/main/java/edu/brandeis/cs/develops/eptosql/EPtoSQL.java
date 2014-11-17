@@ -21,7 +21,7 @@ public class EPtoSQL {
 				ASTNode n = p.parseString(plan);
 				ASTTranslator t = new ASTTranslator();
 				Relation r = t.parse((EP) n);
-				System.out.println(SQLGenerator.createUnnestedSQL(r));
+				System.out.println(SQLGenerator.createNestedSQL(r));
 
 			} catch (ParserException e) {
 				System.err.println("Parser exception: " + e.getMessage());

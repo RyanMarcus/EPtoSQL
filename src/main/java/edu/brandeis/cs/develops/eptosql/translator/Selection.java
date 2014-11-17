@@ -1,5 +1,9 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
 public class Selection extends Relation{
 	private Relation leftChild;
 	private String predicate;
@@ -30,5 +34,10 @@ public class Selection extends Relation{
 	
 	public String toString() {
 		return "Select " + this.getPredicate() + " from " + this.getChild().toString();
+	}
+
+	@Override
+	public Set<Relation> getChildren() {
+		return Sets.newHashSet(new Relation[] {leftChild});
 	}
 }

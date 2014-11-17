@@ -1,5 +1,9 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
 public class Table extends Relation {
 	private String name;
 	
@@ -21,5 +25,10 @@ public class Table extends Relation {
 	
 	public String toString() {
 		return "Table" + this.name;
+	}
+
+	@Override
+	public Set<Relation> getChildren() {
+		return Sets.newHashSet();
 	}
 }

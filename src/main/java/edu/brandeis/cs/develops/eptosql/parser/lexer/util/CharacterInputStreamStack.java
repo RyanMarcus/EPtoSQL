@@ -41,7 +41,6 @@ public class CharacterInputStreamStack implements Deque<Character> {
 		
 	}
 
-	@Override
 	public boolean isEmpty() {
 		if (!buffer.isEmpty())
 			return false;
@@ -60,38 +59,31 @@ public class CharacterInputStreamStack implements Deque<Character> {
 		
 	}
 
-	@Override
 	public Object[] toArray() {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public <T> T[] toArray(T[] a) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public boolean containsAll(Collection<?> c) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public boolean addAll(Collection<? extends Character> c) {
 		return buffer.addAll(c);
 	}
 
-	@Override
 	public boolean removeAll(Collection<?> c) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public boolean retainAll(Collection<?> c) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public void clear() {
 		buffer.clear();
 		try {
@@ -101,155 +93,128 @@ public class CharacterInputStreamStack implements Deque<Character> {
 		}
 	}
 
-	@Override
 	public void addFirst(Character e) {
 		buffer.addFirst(e);
 	}
 
-	@Override
 	public void addLast(Character e) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public boolean offerFirst(Character e) {
 		return buffer.offerFirst(e);
 	}
 
-	@Override
 	public boolean offerLast(Character e) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public Character removeFirst() {
 		ensureBufferHasItems();
 		return buffer.removeFirst();
 	}
 
-	@Override
 	public Character removeLast() {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public Character pollFirst() {
 		ensureBufferHasItems();
 		return buffer.pollFirst();
 	}
 
-	@Override
 	public Character pollLast() {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public Character getFirst() {
 		ensureBufferHasItems();
 		return buffer.getFirst();
 	}
 
-	@Override
 	public Character getLast() {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 	}
 
-	@Override
 	public Character peekFirst() {
 		ensureBufferHasItems();
 		return buffer.peekFirst();
 	}
 
-	@Override
 	public Character peekLast() {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public boolean removeFirstOccurrence(Object o) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public boolean removeLastOccurrence(Object o) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public boolean add(Character e) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public boolean offer(Character e) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public Character remove() {
 		ensureBufferHasItems();
 		return buffer.remove();
 	}
 
-	@Override
 	public Character poll() {
 		ensureBufferHasItems();
 		return buffer.poll();
 	}
 
-	@Override
 	public Character element() {
 		ensureBufferHasItems();
 		return buffer.element();
 	}
 
-	@Override
 	public Character peek() {
 		ensureBufferHasItems();
 		return buffer.peek();
 	}
 
-	@Override
 	public void push(Character e) {
 		buffer.push(e);
 		
 	}
 
-	@Override
 	public Character pop() {
 		ensureBufferHasItems();
 		return buffer.pop();
 	}
 
-	@Override
 	public boolean remove(Object o) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public boolean contains(Object o) {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public int size() {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
 	}
 
-	@Override
 	public Iterator<Character> iterator() {
 		return new CharacterInputStreamStackIterator(this);
 	}
 
-	@Override
 	public Iterator<Character> descendingIterator() {
 		throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack");
 
@@ -291,19 +256,16 @@ public class CharacterInputStreamStack implements Deque<Character> {
 			return toR;
 		}
 		
-		@Override
 		public boolean hasNext() {
 			return getItemAtPosition(position) != null;
 		}
 
-		@Override
 		public Character next() {
 			Character toR = getItemAtPosition(position);
 			position++;
 			return toR;
 		}
 
-		@Override
 		public void remove() {
 			throw new UnsupportedOperationException("This operation is not supported by the CharacterInputStreamStack iterator");
 			

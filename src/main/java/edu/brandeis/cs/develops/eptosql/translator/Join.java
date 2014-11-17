@@ -1,5 +1,9 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
 public class Join extends Relation {
 	private Relation leftChild;
 	private Relation rightChild;
@@ -57,5 +61,10 @@ public class Join extends Relation {
 	
 	public String toString() {
 		return this.getLeftChild().toString() + " " + this.getJoinType() + " " + this.getRightChild().toString() + " on " + this.getPredicate();
+	}
+
+	@Override
+	public Set<Relation> getChildren() {
+		return Sets.newHashSet(new Relation[] { this.getLeftChild(), this.getRightChild() });
 	}
 }
