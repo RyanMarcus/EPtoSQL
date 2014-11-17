@@ -5,7 +5,11 @@ import edu.brandeis.cs.develops.eptosql.translator.JoinType;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
 import edu.brandeis.cs.develops.eptosql.translator.Selection;
 import edu.brandeis.cs.develops.eptosql.translator.Table;
-
+/**
+ * 
+ * @author Brionne Godby
+ * @since 11/17/2014
+ */
 public class SQLGenerator {
 
 	

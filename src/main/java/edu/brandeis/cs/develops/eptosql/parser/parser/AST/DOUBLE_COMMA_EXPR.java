@@ -1,5 +1,9 @@
 package edu.brandeis.cs.develops.eptosql.parser.parser.AST;
 
+/**
+ * @author Ryan Marcus
+ * @since 11/17/2014
+ */
 public class DOUBLE_COMMA_EXPR extends ASTNode {
 	public COMMA_EXPR expr1;
 	public COMMA_EXPR expr2;

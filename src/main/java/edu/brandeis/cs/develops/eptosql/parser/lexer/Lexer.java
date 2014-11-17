@@ -6,7 +6,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import edu.brandeis.cs.develops.eptosql.parser.lexer.util.CharacterInputStreamStack;
-
+/**
+ * 
+ * @author Ryan Marcus
+ * @since 11/17/2014
+ */
 public class Lexer implements Iterator<Token> {
 
 	private Deque<Character> charStack;

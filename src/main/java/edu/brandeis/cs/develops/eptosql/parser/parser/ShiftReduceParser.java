@@ -39,6 +39,10 @@ import edu.brandeis.cs.develops.eptosql.parser.parser.AST.TABLE;
  * 
  */
 
+/**
+ * @author Ryan Marcus
+ * @since 11/17/2014
+ */
 public class ShiftReduceParser {
 	private Deque<ASTNode> stack;
 

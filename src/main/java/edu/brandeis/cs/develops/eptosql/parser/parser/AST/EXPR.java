@@ -1,5 +1,9 @@
 package edu.brandeis.cs.develops.eptosql.parser.parser.AST;
 
+/**
+ * @author Ryan Marcus
+ * @since 11/17/2014
+ */
 public class EXPR extends ASTNode {
 	public SELECTION selection = null;
 	public JOIN join = null;
