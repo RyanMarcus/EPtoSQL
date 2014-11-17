@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.google.common.collect.Lists;
+
 import edu.brandeis.cs.develops.eptosql.code_generator.SQLGenerator;
 import edu.brandeis.cs.develops.eptosql.translator.Join;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
@@ -26,12 +28,20 @@ public class IRGenerator {
 	private List<Relation> emit;
 	
 	public synchronized List<Relation> decompose(Relation r) throws IRGenerationException {
+		if (r instanceof Table) {
+			return Lists.asList(r, new Relation[] {});
+		}
+		
+		
 		tempCounter = new AtomicInteger(0);
 		emit = new LinkedList<Relation>();
 		decomposeSubtree(r);
 		
+		
+		
 		List<Relation> toR = emit;
 		emit = null;
+		tempCounter = null;
 		return toR;
 	}
 
