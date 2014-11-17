@@ -15,6 +15,7 @@ import com.google.common.collect.Sets;
 public class Selection extends Relation{
 	private Relation leftChild; /**Relation being queried*/
 	private String predicate; /**Selection predicate*/
+	private String into;
 	/**
 	 * 
 	 * @param leftChild Relation
@@ -75,5 +76,13 @@ public class Selection extends Relation{
 	@Override
 	public Set<Relation> getChildren() {
 		return Sets.newHashSet(new Relation[] {leftChild});
+	}
+
+	public String getInto() {
+		return into;
+	}
+
+	public void setInto(String into) {
+		this.into = into;
 	}
 }
