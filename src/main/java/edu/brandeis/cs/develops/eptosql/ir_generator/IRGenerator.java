@@ -11,6 +11,15 @@ import edu.brandeis.cs.develops.eptosql.translator.SampleTrees;
 import edu.brandeis.cs.develops.eptosql.translator.Selection;
 import edu.brandeis.cs.develops.eptosql.translator.Table;
 
+/**
+ * Generates "IR" for SQL Server. It isn't really IR, since
+ * the representation is just subtrees of teh AST, but it does
+ * generate a series of trees that, when compiled, produce the
+ * correct answer.
+ * 
+ * @author "Ryan Marcus <ryan@rmarcus.info>"
+ *
+ */
 public class IRGenerator {
 
 	private AtomicInteger tempCounter;
@@ -63,5 +72,6 @@ public class IRGenerator {
 		for (Relation r : subPlans) {
 			System.out.println(SQLGenerator.createUnnestedSQL(r));
 		}
+		
 	}
 }

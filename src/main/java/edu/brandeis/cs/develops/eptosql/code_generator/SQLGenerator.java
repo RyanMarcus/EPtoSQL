@@ -53,6 +53,9 @@ public class SQLGenerator {
         } else if (relation.getRightChild() instanceof Table) {
             return easyJoin(relation, rightDto, leftDto);
         } else {
+            if (relation.getInto() != null)
+            	leftDto.setInto(relation.getInto());
+        	
             leftDto.appendJoin(" ");
             leftDto.appendJoin(evaluateJoinType(relation.getJoinType()));
             leftDto.appendJoin(" (");
@@ -63,6 +66,8 @@ public class SQLGenerator {
             leftDto.appendJoin(relation.getPredicate());
             return leftDto;
         }
+        
+        
     }
 
     private static SQLDto easyJoin(Join relation, SQLDto simpleDto, SQLDto complexDto) {
@@ -76,12 +81,20 @@ public class SQLGenerator {
             complexDto.appendJoin(" AND ");
         }
         complexDto.appendJoin(relation.getPredicate());
+        
+        if (relation.getInto() != null)
+        	complexDto.setInto(relation.getInto());
+        
         return complexDto;
     }
 
     private static SQLDto unnestedSQL(Selection relation) {
         SQLDto childDto = unnestedSQL(relation.getChild());
         childDto.appendWhere(relation.getPredicate());
+        
+        if (relation.getInto() != null)
+        	childDto.setInto(relation.getInto());
+        
         return childDto;
     }
 
@@ -106,18 +119,29 @@ public class SQLGenerator {
     }
 
     private static String nestedSQL(Join relation) {
+    	String intoClause = "";
+    	
+    	if (relation.getInto() != null)
+    		intoClause = "INTO " + relation.getInto();
+    	
         if(relation.getLeftChild() instanceof Table && relation.getRightChild() instanceof Table){
-            return String.format("SELECT * FROM %s  %s %s table_right ON (%s)", ((Table) relation.getLeftChild()).getName(), evaluateJoinType(relation.getJoinType()), ((Table) relation.getRightChild()).getName(), relation.getPredicate());
+            return String.format("SELECT * %s FROM %s  %s %s table_right ON (%s)", intoClause, ((Table) relation.getLeftChild()).getName(), evaluateJoinType(relation.getJoinType()), ((Table) relation.getRightChild()).getName(), relation.getPredicate());
         }else{
-            return String.format("SELECT * FROM (%s) table_left %s (%s) table_right ON (%s)", nestedSQL(relation.getLeftChild()), evaluateJoinType(relation.getJoinType()), nestedSQL(relation.getRightChild()), relation.getPredicate());
+            return String.format("SELECT * %s FROM (%s) table_left %s (%s) table_right ON (%s)", intoClause, nestedSQL(relation.getLeftChild()), evaluateJoinType(relation.getJoinType()), nestedSQL(relation.getRightChild()), relation.getPredicate());
         }
     }
 
     private static String nestedSQL(Selection relation) {
+    	String intoClause = "";
+    	
+    	if (relation.getInto() != null)
+    		intoClause = "INTO " + relation.getInto();
+    	
+    	
         if(relation.getChild() instanceof Table){
-            return String.format("SELECT * FROM %s table_inner WHERE %s", ((Table) relation.getChild()).getName(), relation.getPredicate());
+            return String.format("SELECT * %s FROM %s table_inner WHERE %s", intoClause, ((Table) relation.getChild()).getName(), relation.getPredicate());
         }else{
-            return String.format("SELECT * FROM (%s) table_inner WHERE %s", nestedSQL(relation.getChild()), relation.getPredicate());
+            return String.format("SELECT * %s FROM (%s) table_inner WHERE %s", intoClause, nestedSQL(relation.getChild()), relation.getPredicate());
         }
     }
 

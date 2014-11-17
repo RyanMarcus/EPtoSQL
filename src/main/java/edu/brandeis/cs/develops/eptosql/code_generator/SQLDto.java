@@ -16,17 +16,25 @@ public class SQLDto {
     private final StringBuilder whereClause = new StringBuilder();
     private final StringBuilder joinClause = new StringBuilder();
     private final AtomicInteger alias_index = new AtomicInteger(1);
-
+    private String into;
+    
     @Override
     public String toString() {
         return this.generateSQL();
     }
 
     public String generateSQL() {
+    	String intoClause = "";
+    	
+    	if (into != null) {
+    		intoClause = "INTO " + into;
+    	}
+    	
+    	
         if (whereClause.length() > 0) {
-            return String.format("SELECT * FROM %s %s WHERE %s", fromClause, joinClause, whereClause);
+            return String.format("SELECT * %s FROM %s %s WHERE %s", intoClause, fromClause, joinClause, whereClause);
         } else {
-            return String.format("SELECT * FROM %s %s", fromClause, joinClause);
+            return String.format("SELECT * %s FROM %s %s", intoClause, fromClause, joinClause);
         }
     }
 
@@ -64,4 +72,8 @@ public class SQLDto {
 
         return String.format("table_", alias_index.getAndIncrement());
     }
+
+	public void setInto(String into) {
+		this.into = into;
+	}
 }
