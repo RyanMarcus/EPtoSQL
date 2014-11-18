@@ -54,18 +54,22 @@ public class ShiftReduceParser {
 		stack = new LinkedList<ASTNode>();
 		while (tokens.hasNext()) {
 			stack.push(shift(tokens.next()));
-			//System.out.println(stack);
+			// System.out.println(stack);
 			while (reduce()) {
-				//System.out.println(stack);
+				// System.out.println(stack);
 			}
 		}
-		
+
 		if (stack.size() != 1)
-			throw new ParserException("More than one element remaining on the stack: " + stack.toString());
-		
+			throw new ParserException(
+					"More than one element remaining on the stack: "
+							+ stack.toString());
+
 		if (!(stack.peek() instanceof EP))
-			throw new ParserException("Item left on stack is not of proper type: " + stack.toString());
-		
+			throw new ParserException(
+					"Item left on stack is not of proper type: "
+							+ stack.toString());
+
 		return stack.pop();
 	}
 
@@ -77,6 +81,12 @@ public class ShiftReduceParser {
 				PAREN_STRING_EXPR_EXPR toPush = new PAREN_STRING_EXPR_EXPR();
 				toPush.double_comma_expr = (DOUBLE_COMMA_EXPR) stack.pop();
 				toPush.string = stack.pop().getToken().getContent();
+
+				if (stack.isEmpty()
+						|| stack.peek().getToken().getType() != TokenType.LP) {
+					throw new ParserException("Was expecting LP");
+				}
+
 				stack.pop(); // the LP
 				stack.push(toPush);
 				return true;
@@ -86,13 +96,13 @@ public class ShiftReduceParser {
 			if (stack.peek() instanceof COMMA_EXPR) {
 				PAREN_STRING_EXPR toPush = new PAREN_STRING_EXPR();
 				toPush.expr = (COMMA_EXPR) stack.pop();
-				
+
 				if (stack.isEmpty()
 						|| stack.peek().getToken() == null
 						|| stack.peek().getToken().getType() != TokenType.STRING)
-					throw new ParserException("Expected string followed by comma expression");
-				
-				
+					throw new ParserException(
+							"Expected string followed by comma expression");
+
 				toPush.string = stack.pop().getToken().getContent();
 				stack.pop(); // the LP
 				stack.push(toPush);
@@ -189,7 +199,7 @@ public class ShiftReduceParser {
 			stack.push(toPush);
 			return true;
 		}
-		
+
 		if (lookahead instanceof JOIN) {
 			// apply rule 2
 			EXPR toPush = new EXPR();
@@ -197,7 +207,7 @@ public class ShiftReduceParser {
 			stack.push(toPush);
 			return true;
 		}
-		
+
 		if (lookahead instanceof TABLE) {
 			// apply rule 2
 			EXPR toPush = new EXPR();
@@ -213,9 +223,10 @@ public class ShiftReduceParser {
 	private ASTNode shift(Token next) {
 		return new ASTNode(next);
 	}
-	
+
 	public static void main(String[] args) throws ParserException {
 		ShiftReduceParser p = new ShiftReduceParser();
-		p.parseTokens(Lexer.createLexerForString("PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S))"));
+		p.parseTokens(Lexer
+				.createLexerForString("PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S))"));
 	}
 }

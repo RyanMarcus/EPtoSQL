@@ -59,6 +59,27 @@ public class LexerTest {
 	}
 	
 	@Test
+	public void test3HashJoin() {
+		Iterator<Token> it = Lexer.createLexerForString("PHJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S))");
+		assertTrue(it.next().getType() == TokenType.PHJOIN);
+		assertTrue(it.next().getType() == TokenType.LP);
+		assertTrue(it.next().getType() == TokenType.STRING);
+		assertTrue(it.next().getType() == TokenType.COMMA);
+		assertTrue(it.next().getType() == TokenType.PTABLE);
+		assertTrue(it.next().getType() == TokenType.LP);
+		assertTrue(it.next().getType() == TokenType.STRING);
+		assertTrue(it.next().getType() == TokenType.RP);
+		assertTrue(it.next().getType() == TokenType.COMMA);
+		assertTrue(it.next().getType() == TokenType.PTABLE);
+		assertTrue(it.next().getType() == TokenType.LP);
+		assertTrue(it.next().getType() == TokenType.STRING);
+		assertTrue(it.next().getType() == TokenType.RP);
+		assertTrue(it.next().getType() == TokenType.RP);
+		assertFalse(it.hasNext());
+
+	}
+	
+	@Test
 	public void test4() {
 		Iterator<Token> it = Lexer.createLexerForString("PNLJOIN(s_nationkey = n_nationkey, PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S)), PSELECT(n_name = 'ASIA', PTABLE(N)))");
 		assertTrue(it.next().getType() == TokenType.PNLJOIN);

@@ -1,27 +1,48 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
+
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
+
 /**
  * Describes a Join query - subtree of Relation
  * @author Rachel Leeman-Munk
  * @since 11/17/2014
  */
+
 public class Join extends Relation {
 	private Relation leftChild; /**outer relation being joined*/
 	private Relation rightChild; /**inner relation being joined*/
 	private String predicate; /**predicate the relations are joined by*/
 	private JoinType joinType; /**type of join*/
+	private String into;
 	
 	/**
 	 * @param leftChild outer relation
 	 * @param rightChild inner relation
 	 * @param predicate join predicate
-	 * @param joinType join Type
+	 * @param joinType join type, as a string from the DevelOPs code
 	 */
 	public Join(Relation leftChild, Relation rightChild, String predicate, String joinType) {
 		this.setLeftChild(leftChild);
 		this.setRightChild(rightChild);
 		this.setPredicate(predicate);
 		this.setJoinType(joinType);
+	}
+	
+	/**
+	 * @param leftChild outer relation
+	 * @param rightChild inner relation
+	 * @param predicate join predicate
+	 * @param joinType join type
+	 */
+	public Join(Relation leftChild, Relation rightChild, String predicate, JoinType joinType) {
+		this.setLeftChild(leftChild);
+		this.setRightChild(rightChild);
+		this.setPredicate(predicate);
+		this.joinType = joinType;
 	}
 
 	/**
@@ -109,5 +130,18 @@ public class Join extends Relation {
 	 */
 	public String toString() {
 		return this.getLeftChild().toString() + " " + this.getJoinType() + " " + this.getRightChild().toString() + " on " + this.getPredicate();
+	}
+
+	@Override
+	public Set<Relation> getChildren() {
+		return Sets.newHashSet(new Relation[] { this.getLeftChild(), this.getRightChild() });
+	}
+
+	public String getInto() {
+		return into;
+	}
+
+	public void setInto(String into) {
+		this.into = into;
 	}
 }

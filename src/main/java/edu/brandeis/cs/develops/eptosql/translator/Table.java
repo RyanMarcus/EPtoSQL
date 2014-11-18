@@ -1,10 +1,17 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
+
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
+
 /**
  * 
  * @author Rachel Leeman-Munk
  * @since 11/17/2014
  */
+
 public class Table extends Relation {
 	private String name; /**Name of Table*/
 	/**
@@ -38,5 +45,10 @@ public class Table extends Relation {
 	}
 	public String toString() {
 		return "Table" + this.name;
+	}
+
+	@Override
+	public Set<Relation> getChildren() {
+		return Sets.newHashSet();
 	}
 }

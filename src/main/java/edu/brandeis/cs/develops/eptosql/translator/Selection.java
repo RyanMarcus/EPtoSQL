@@ -1,13 +1,21 @@
 package edu.brandeis.cs.develops.eptosql.translator;
 
+
+import java.util.Set;
+
+import com.google.common.collect.Sets;
+
+
 /**
  * Describes a Selection query - subtree of Relation
  * @author Rachel Leeman-Munk
  * @since 11/17/2014
  */
+
 public class Selection extends Relation{
 	private Relation leftChild; /**Relation being queried*/
 	private String predicate; /**Selection predicate*/
+	private String into;
 	/**
 	 * 
 	 * @param leftChild Relation
@@ -63,5 +71,18 @@ public class Selection extends Relation{
 	 */
 	public String toString() {
 		return "Select " + this.getPredicate() + " from " + this.getChild().toString();
+	}
+
+	@Override
+	public Set<Relation> getChildren() {
+		return Sets.newHashSet(new Relation[] {leftChild});
+	}
+
+	public String getInto() {
+		return into;
+	}
+
+	public void setInto(String into) {
+		this.into = into;
 	}
 }
