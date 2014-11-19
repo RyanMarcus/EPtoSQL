@@ -117,6 +117,7 @@ public class SemanticAnalyzer {
 	
 	public static void main(String[] args) {
 		SemanticAnalyzer sa = new SemanticAnalyzer();
+
 		List<SemanticAnnotation> sem = sa.analyze(SampleTrees.TwoJoinSelectionExpression());
 		
 		for (SemanticAnnotation SemAn : sem) {
