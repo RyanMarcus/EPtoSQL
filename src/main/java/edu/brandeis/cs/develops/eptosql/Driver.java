@@ -10,7 +10,6 @@ import edu.brandeis.cs.develops.eptosql.frontend.IROption;
 public class Driver {
 
 	public static void main(String[] args) {
-		
 		CodeGenerationOption cgo = CodeGenerationOption.UNNESTED;
 		IROption iro = IROption.ENABLE;
 		
