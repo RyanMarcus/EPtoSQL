@@ -58,6 +58,7 @@ public class Cli {
    if (cmd.hasOption("ir_disable"))
 	   iro = IROption.DISABLE;
    if (cmd.hasOption("f")) {
+	   log.log(Level.INFO, "Using cli argument -f=" + cmd.getOptionValue("f "));
 	   String filename = cmd.getOptionValue("f");
 	   sc = new Scanner(filename);
    } else {   
