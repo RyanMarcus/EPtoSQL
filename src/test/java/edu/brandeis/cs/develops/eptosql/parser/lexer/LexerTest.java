@@ -123,7 +123,7 @@ public class LexerTest {
 	
 	@Test
 	public void test6() {
-		
+		// test lexing of semantically invalid string
 		String s = "PNLJOIN(s_nationkey = n_nationkey, PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S)), PSELECT(n_name = 'ASIA', PTABLE(N)))";
 		ByteArrayInputStream is = new ByteArrayInputStream(s.getBytes());
 		
