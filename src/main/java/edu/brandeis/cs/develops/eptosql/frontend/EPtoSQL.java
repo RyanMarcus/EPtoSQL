@@ -1,7 +1,13 @@
 package edu.brandeis.cs.develops.eptosql.frontend;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +28,6 @@ public class EPtoSQL {
 	 * will be written to. The write will be synchronous, meaning that the output stream will be
 	 * fully readable when the method returns. This may change in the future.
 	 * 
-	 * You should assume that the output stream is not ready to be read until it is closed.
 	 * 
 	 * The CodeGenerationOption allows you to pick between nested (queries where each physical
 	 * operator is explicitly given in the SQL statement) and unnested (where selections are pulled
@@ -65,6 +70,7 @@ public class EPtoSQL {
 				}
 			}
 			
+			os.flush();
 			os.close();
 			
 		} catch (ParserException e) {
@@ -74,6 +80,71 @@ public class EPtoSQL {
 			System.err.println("IR generation exception: " + e.getMessage());
 			System.exit(-1);
 		}
+	}
+	
+	public static String syncCompile(CodeGenerationOption cgo, IROption iro, String executionPlan) throws IOException {
+		StringBuilder sb = new StringBuilder();
+		
+		EPtoSQL compiler = new EPtoSQL();
+		
+		ByteArrayInputStream in = new ByteArrayInputStream(executionPlan.getBytes());
+
+		PipedInputStream resultStream = new PipedInputStream();
+		PipedOutputStream writeTo = new PipedOutputStream(resultStream);
+		
+		compiler.compile(cgo, iro, in, writeTo);
+		
+		
+		BufferedReader sc = new BufferedReader(new InputStreamReader(resultStream));
+		String line;
+		while ((line = sc.readLine()) != null) {
+			sb.append(line);
+			sb.append("\n");
+		}
+		
+		
+		return sb.toString();
+		
+	}
+	
+	/**
+	 * Some example code showing how to use this class
+	 * @param args ignored
+	 * @throws IOException 
+	 */
+	public static void main(String[] args) throws IOException {
+		
+		/* -------------------------------------------
+		 * Example 1: The async API
+		 * -------------------------------------------
+		 */
+		EPtoSQL compiler = new EPtoSQL();
+		String query = "PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S))";
+		
+		ByteArrayInputStream in = new ByteArrayInputStream(query.getBytes());
+
+		PipedInputStream resultStream = new PipedInputStream();
+		PipedOutputStream writeTo = new PipedOutputStream(resultStream);
+		
+		compiler.compile(CodeGenerationOption.NESTED, IROption.ENABLE, in, writeTo);
+		
+		
+		BufferedReader sc = new BufferedReader(new InputStreamReader(resultStream));
+		String line;
+		while ((line = sc.readLine()) != null) {
+			System.out.println(line);
+		}
+		
+		/* -------------------------------------------
+		 * Example 2: The sync API
+		 * -------------------------------------------
+		 */
+		
+		String SQL = EPtoSQL.syncCompile(CodeGenerationOption.NESTED, IROption.ENABLE, query);
+		System.out.println(SQL);
+		
+		
+		
 	}
 	
 }
