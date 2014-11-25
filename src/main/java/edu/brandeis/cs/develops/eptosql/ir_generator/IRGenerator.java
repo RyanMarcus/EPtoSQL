@@ -6,10 +6,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.common.collect.Lists;
 
-import edu.brandeis.cs.develops.eptosql.code_generator.SQLGenerator;
 import edu.brandeis.cs.develops.eptosql.translator.Join;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
-import edu.brandeis.cs.develops.eptosql.translator.SampleTrees;
 import edu.brandeis.cs.develops.eptosql.translator.Selection;
 import edu.brandeis.cs.develops.eptosql.translator.Table;
 
@@ -74,14 +72,4 @@ public class IRGenerator {
 	
 	}
 	
-	public static void main(String[] args) throws IRGenerationException {
-		IRGenerator ir = new IRGenerator();
-		
-		List<Relation> subPlans = ir.decompose(SampleTrees.EmployeeDepartmentExpression());
-		
-		for (Relation r : subPlans) {
-			System.out.println(SQLGenerator.createUnnestedSQL(r));
-		}
-		
-	}
 }

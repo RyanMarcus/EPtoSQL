@@ -3,6 +3,7 @@ package edu.brandeis.cs.develops.eptosql.ir_generator;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -95,6 +96,21 @@ public class IRGeneratorTests {
 		assertTrue(r.get(1) instanceof Selection);
 		Selection s2 = (Selection) r.get(1);
 		assertTrue(((Table) s2.getChild()).getName().equals(s1.getInto()));
+		
+	}
+	
+	@Test(expected=IRGenerationException.class)
+	public void errorTest1() throws IRGenerationException {
+		ir.decompose(new SomeOtherType());
+	}
+	
+	private class SomeOtherType extends Relation {
+
+		@Override
+		public Set<Relation> getChildren() {
+			// TODO Auto-generated method stub
+			return null;
+		}
 		
 	}
 	
