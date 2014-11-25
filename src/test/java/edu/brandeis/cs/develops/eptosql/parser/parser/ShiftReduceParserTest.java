@@ -55,12 +55,6 @@ public class ShiftReduceParserTest {
 		assertTrue(ep.expr.join.paren_string_expr_expr.double_comma_expr.expr2.expr.selection.paren_string_expr.expr.expr.table.paren_string.string.equals("N"));
 	}
 	
-	@Test
-	public void test5() throws ParserException {
-		String s = "PHJOIN(c_nationkey = n_nationkey, PHJOIN(o_orderkey = l_orderkey, PHJOIN(c_custkey = o_custkey, PTABLE(CUSTOMER), PTABLE(ORDERS)), PSELECT(l_returnflag = 'R',PTABLE(LINEITEM)), PTABLE(NATION))";
-		EP ep = (EP) p.parseTokens(Lexer.createLexerForString(s));
-		assertTrue(ep.expr.join.join_type.type.equals("PHJOIN"));
-	}
 	
 	@Test(expected=ParserException.class)
 	public void invalidTest1() throws ParserException {
