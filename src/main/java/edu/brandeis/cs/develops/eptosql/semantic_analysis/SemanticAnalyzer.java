@@ -16,6 +16,14 @@ import edu.brandeis.cs.develops.eptosql.translator.Relation;
 import edu.brandeis.cs.develops.eptosql.translator.SampleTrees;
 import edu.brandeis.cs.develops.eptosql.translator.Selection;
 
+/**
+ * A semantic analysis class that analyzes the output of the AST translator
+ * and checks for various issues (join over selection, selection over join)
+ * that are known to occur with SQL Server.
+ * 
+ * @author Ryan Marcus < ryan @ rmarcus.info >
+ *
+ */
 public class SemanticAnalyzer {
 	public List<SemanticAnnotation> analyze(Relation r) {
 		List<SemanticAnnotation> toR = new LinkedList<SemanticAnnotation>();
