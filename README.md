@@ -6,12 +6,12 @@ Compiles DevelOPs execution plans into SQL Server statements that force the serv
 
 Project members:
 
-  * Brionne Godby < bgodby (at) brandeis (dot) edu >
-  * [Rachel Leeman-Munk](http://rleemanmunk.me) < rmunk (at) brandeis (dot) edu >
-  * [Ryan Marcus](http://rmarcus.info) < rcmarcus (at) brandeis (dot) edu >
+  * Brionne Godby `< bgodby (at) brandeis (dot) edu >`
+  * [Rachel Leeman-Munk](http://rleemanmunk.me) `< rmunk (at) brandeis (dot) edu >`
+  * [Ryan Marcus](http://rmarcus.info) `< rcmarcus (at) brandeis (dot) edu >`
   
 With thanks to:
 
-  * Zhibo Peng < docp (at) brandeis (dot) edu >
+  * Zhibo Peng `< docp (at) brandeis (dot) edu >`
 
 
