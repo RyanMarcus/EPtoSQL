@@ -41,7 +41,12 @@ import edu.brandeis.cs.develops.eptosql.parser.parser.AST.TABLE;
 
 /**
  * @author Ryan Marcus
- * @since 11/17/2014
+ * 
+ * A hand-written, shift-reduce LR(1) parser for physical plans
+ * as specified by the grammer above (in the source file). Turns an
+ * iterator of tokens (provided by the lexer) into the verbose AST structure
+ * that should then be passed to the AST translator.
+ * 
  */
 public class ShiftReduceParser {
 	private Deque<ASTNode> stack;

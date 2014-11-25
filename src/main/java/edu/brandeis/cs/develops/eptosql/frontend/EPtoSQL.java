@@ -21,6 +21,15 @@ import edu.brandeis.cs.develops.eptosql.parser.parser.AST.EP;
 import edu.brandeis.cs.develops.eptosql.translator.ASTTranslator;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
 
+/**
+ * 
+ * This class contains two methods that could be used to access the compiler. The compile() method
+ * is the preferred method of accessing the compiler, and can work asynchronously. The static method
+ * syncCompile() provides a syncronous way of accessing the compiler that may be simpler.
+ * 
+ * @author Ryan Marcus < ryan @ rmarcus.info >
+ *
+ */
 public class EPtoSQL {
 	/**
 	 * The main API frontend to the compiler. Give an input stream with a single physical
