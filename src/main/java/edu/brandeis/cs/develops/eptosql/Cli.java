@@ -1,5 +1,7 @@
 package edu.brandeis.cs.develops.eptosql;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,7 +39,7 @@ public class Cli {
   options.addOption("ir_disable", "disable ir", false, "if included, disable ir");
  }
 
- public void parse() {
+ public void parse() throws FileNotFoundException {
   CommandLineParser parser = new BasicParser();
   
   CodeGenerationOption cgo = CodeGenerationOption.UNNESTED;
@@ -57,14 +59,16 @@ public class Cli {
    if (cmd.hasOption("ir_disable"))
 	   iro = IROption.DISABLE;
    if (cmd.hasOption("f")) {
-	   log.log(Level.INFO, "Using cli argument -f=" + cmd.getOptionValue("f "));
+	   //log.log(Level.INFO, "Using cli argument -f=" + cmd.getOptionValue("f"));
 	   String filename = cmd.getOptionValue("f");
-	   sc = new Scanner(filename);
+	   sc = new Scanner(new File(filename));
    } else {   
 	   sc = new Scanner(System.in);
    }
    String plan;
-   while ((plan = sc.nextLine()) != null) {
+   while((sc.hasNextLine())) {
+	   plan = sc.nextLine();
+	   System.out.println(plan);
 	   EPtoSQL ets = new EPtoSQL();
 	   ets.compile(cgo, iro, new ByteArrayInputStream(plan.getBytes()), System.out);
    }
