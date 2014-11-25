@@ -32,7 +32,7 @@ public class Cli {
   this.args = args;
 
   options.addOption("h", "help", false, "show help.");
-  options.addOption("f", "filename", false, "file to translate.");
+  options.addOption("f", "filename", true, "file to translate.");
   options.addOption("nested", "nested", false, "if included, generate nested code");
   options.addOption("ir_disable", "disable ir", false, "if included, disable ir");
  }
@@ -47,7 +47,6 @@ public class Cli {
    try {
 	cmd = parser.parse(options, args);
 } catch (ParseException e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
 
@@ -58,6 +57,7 @@ public class Cli {
    if (cmd.hasOption("ir_disable"))
 	   iro = IROption.DISABLE;
    if (cmd.hasOption("f")) {
+	   log.log(Level.INFO, "Using cli argument -f=" + cmd.getOptionValue("f "));
 	   String filename = cmd.getOptionValue("f");
 	   sc = new Scanner(filename);
    } else {   

@@ -1,0 +1,4 @@
+PTABLE(PS)
+PSELECT(n_name = 'ASIA', PTABLE(N))
+PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S))
+PNLJOIN(s_nationkey = n_nationkey, PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S)), PSELECT(n_name = 'ASIA', PTABLE(N)))
