@@ -16,6 +16,19 @@ import edu.brandeis.cs.develops.eptosql.translator.ASTTranslator;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
 
 public class EPtoSQL {
+	/**
+	 * The main API frontend to the compiler. Give an input stream with a single physical
+	 * execution plan terminated by a new line. Also give an output stream where the SQL
+	 * will be written to. The write will be synchronous, meaning that the output stream will be
+	 * fully readable when the method returns. This may change in the future.
+	 * 
+	 * You should assume that the output stream is not ready to be read until it is closed.
+	 * 
+	 * @param cgo
+	 * @param iro
+	 * @param is
+	 * @param out
+	 */
 	public void compile(CodeGenerationOption cgo, IROption iro, InputStream is, OutputStream out) {		
 		try {
 			Parser p = new Parser();
@@ -43,6 +56,8 @@ public class EPtoSQL {
 					os.println(SQLGenerator.createUnnestedSQL(subr));
 				}
 			}
+			
+			os.close();
 			
 		} catch (ParserException e) {
 			System.err.println("Parser exception: " + e.getMessage());
