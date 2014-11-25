@@ -12,6 +12,6 @@ Project members:
   
 With thanks to:
 
-  * Zhibo Peng <docp (at) brandeis (dot) edu>
+  * Zhibo Peng < docp (at) brandeis (dot) edu >
 
 
