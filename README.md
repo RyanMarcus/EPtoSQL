@@ -7,8 +7,8 @@ Compiles DevelOPs execution plans into SQL Server statements that force the serv
 Project members:
 
   * Brionne Godby <bgodby (at) brandeis (dot) edu>
-  * [http://rleemanmunk.me](Rachel Leeman-Munk) <rmunk (at) brandeis (dot) edu>
-  * [http://rmarcus.info](Ryan Marcus) <rcmarcus (at) brandeis (dot) edu>
+  * [Rachel Leeman-Munk](http://rleemanmunk.me) <rmunk (at) brandeis (dot) edu>
+  * (Ryan Marcus)[http://rmarcus.info] <rcmarcus (at) brandeis (dot) edu>
   
 With thanks to:
 
