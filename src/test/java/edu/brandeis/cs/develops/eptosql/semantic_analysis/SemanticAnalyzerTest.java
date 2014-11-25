@@ -59,6 +59,13 @@ public class SemanticAnalyzerTest {
 		Relation r = astt.parse(ep);
 		assertTrue(sa.analyze(r).size() != 0);
 	}
+	
+	@Test
+	public void test6() throws ParserException {
+		EP ep = (EP) p.parseString("PSELECT(a = b, PHJOIN(a = b, PTABLE(A), PTABLE(B)))");
+		Relation r = astt.parse(ep);
+		assertTrue(sa.analyze(r).size() != 0);
+	}
 
 
 
