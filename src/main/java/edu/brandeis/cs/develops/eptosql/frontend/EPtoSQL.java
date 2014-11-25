@@ -1,6 +1,8 @@
 package edu.brandeis.cs.develops.eptosql.frontend;
 
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,10 +16,12 @@ import edu.brandeis.cs.develops.eptosql.translator.ASTTranslator;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
 
 public class EPtoSQL {
-	public void compile(CodeGenerationOption cgo, IROption iro, InputStream is) {		
+	public void compile(CodeGenerationOption cgo, IROption iro, InputStream is, OutputStream out) {		
 		try {
 			Parser p = new Parser();
 			EP ep = (EP) p.parseStream(is);
+			
+			PrintWriter os = new PrintWriter(out);
 			
 			ASTTranslator astt = new ASTTranslator();
 			Relation r = astt.parse(ep);
@@ -34,9 +38,9 @@ public class EPtoSQL {
 		
 			for (Relation subr : toGenerate) {
 				if (cgo == CodeGenerationOption.NESTED) {
-					System.out.println(SQLGenerator.createNestedSQL(subr));
+					os.println(SQLGenerator.createNestedSQL(subr));
 				} else if (cgo == CodeGenerationOption.UNNESTED) {
-					System.out.println(SQLGenerator.createUnnestedSQL(subr));
+					os.println(SQLGenerator.createUnnestedSQL(subr));
 				}
 			}
 			

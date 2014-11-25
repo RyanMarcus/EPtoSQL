@@ -66,7 +66,7 @@ public class Cli {
    String plan;
    while ((plan = sc.nextLine()) != null) {
 	   EPtoSQL ets = new EPtoSQL();
-	   ets.compile(cgo, iro, new ByteArrayInputStream(plan.getBytes()));
+	   ets.compile(cgo, iro, new ByteArrayInputStream(plan.getBytes()), System.out);
    }
    sc.close();
  }
