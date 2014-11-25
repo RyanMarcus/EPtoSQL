@@ -8,7 +8,7 @@ Project members:
 
   * Brionne Godby <bgodby (at) brandeis (dot) edu>
   * [Rachel Leeman-Munk](http://rleemanmunk.me) <rmunk (at) brandeis (dot) edu>
-  * (Ryan Marcus)[http://rmarcus.info] <rcmarcus (at) brandeis (dot) edu>
+  * [Ryan Marcus](http://rmarcus.info) <rcmarcus (at) brandeis (dot) edu>
   
 With thanks to:
 
