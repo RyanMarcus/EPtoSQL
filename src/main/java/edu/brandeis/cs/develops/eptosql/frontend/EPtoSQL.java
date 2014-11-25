@@ -24,10 +24,18 @@ public class EPtoSQL {
 	 * 
 	 * You should assume that the output stream is not ready to be read until it is closed.
 	 * 
-	 * @param cgo
-	 * @param iro
-	 * @param is
-	 * @param out
+	 * The CodeGenerationOption allows you to pick between nested (queries where each physical
+	 * operator is explicitly given in the SQL statement) and unnested (where selections are pulled
+	 * up into the WHERE clause and joins are pulled into the FROM clause).
+	 * 
+	 * The IROption allows you to specify if physical plans should be broken down into 
+	 * subqueries that insert into temporary tables. This option will avoid "selection over join"
+	 * and "join over selection" errors. 
+	 * 
+	 * @param cgo the code generation option
+	 * @param iro the IR generation option
+	 * @param is the input stream to read from
+	 * @param out the output stream the resulting SQL will be written to
 	 */
 	public void compile(CodeGenerationOption cgo, IROption iro, InputStream is, OutputStream out) {		
 		try {
