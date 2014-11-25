@@ -14,7 +14,7 @@ public class GeneratorTest {
     public void dummy() {
         Relation test = SampleTrees.EmployeeDepartmentExpression();
         String SQL = SQLGenerator.createUnnestedSQL(test);
-        System.out.println(SQL);
+        //System.out.println(SQL);
         assertTrue("Dummy Test", true);
     }
 }
