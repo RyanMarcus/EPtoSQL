@@ -55,6 +55,7 @@ public class ShiftReduceParserTest {
 		assertTrue(ep.expr.join.paren_string_expr_expr.double_comma_expr.expr2.expr.selection.paren_string_expr.expr.expr.table.paren_string.string.equals("N"));
 	}
 	
+	
 	@Test(expected=ParserException.class)
 	public void invalidTest1() throws ParserException {
 		p.parseTokens(Lexer.createLexerForString("PNJOIN PMJOIN"));

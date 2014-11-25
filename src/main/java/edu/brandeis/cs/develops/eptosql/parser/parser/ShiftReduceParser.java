@@ -54,9 +54,9 @@ public class ShiftReduceParser {
 		stack = new LinkedList<ASTNode>();
 		while (tokens.hasNext()) {
 			stack.push(shift(tokens.next()));
-			// System.out.println(stack);
+			//System.out.println(stack);
 			while (reduce()) {
-				// System.out.println(stack);
+				 //System.out.println(stack);
 			}
 		}
 
