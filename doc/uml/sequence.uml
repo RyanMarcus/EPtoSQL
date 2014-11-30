@@ -1,0 +1,30 @@
+@startuml
+
+== I/O ==
+User->Compiler: set input stream
+Compiler->Lexer: set input stream
+Lexer->Compiler: token iterator
+Compiler->Parser: set token iterator
+Parser->Lexer: request token
+Lexer->Parser: token
+Parser->Lexer: request token
+Lexer->Parser: token
+Parser->Lexer: request token
+Lexer->Parser: token
+
+== Translation ==
+Parser->Compiler: verbose AST
+Compiler->Translator: verbose AST
+Translator->Compiler: simplified AST
+Compiler->"IR Generator": generate IR
+"IR Generator"->Compiler: IR
+Compiler->"Semantic Analyzer": analyze IR
+"Semantic Analyzer"->Compiler: no errors
+
+== Code Generation ==
+
+Compiler->"Code Generator": error free IR
+"Code Generator"->Compiler: SQL
+Compiler->User: SQL
+
+@enduml

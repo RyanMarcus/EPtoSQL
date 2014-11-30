@@ -1,0 +1,25 @@
+
+@startuml
+:User provides execution plan;
+partition I/O {
+	:Lexer;
+	:Parser;
+}
+
+:AST Translator;
+if (IR enabled?) then (yes)
+	:IR Generation;
+else (no)
+endif
+
+:Semantic Analyzer;
+if (Errors found?) then (yes)
+	:Emit errors;
+	stop
+else (no)
+	:Code Generation;
+	:Emit SQL;
+	stop
+endif
+@enduml
+
