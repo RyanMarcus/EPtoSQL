@@ -18,7 +18,7 @@ import edu.brandeis.cs.develops.eptosql.translator.SampleTrees;
 import edu.brandeis.cs.develops.eptosql.translator.Selection;
 import edu.brandeis.cs.develops.eptosql.translator.Table;
 
-public class IRGeneratorTests {
+public class IRGeneratorTest {
 
 	private Parser p;
 	private ASTTranslator astt;

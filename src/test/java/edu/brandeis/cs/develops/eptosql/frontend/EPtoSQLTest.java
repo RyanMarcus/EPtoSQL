@@ -9,7 +9,7 @@ import java.io.PrintStream;
 import org.junit.Before;
 import org.junit.Test;
 
-public class EPtoSQLTests {
+public class EPtoSQLTest {
 
 	
 	private ByteArrayOutputStream stderrBytes;
