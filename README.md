@@ -14,4 +14,6 @@ With thanks to:
 
   * Zhibo Peng `< docp (at) brandeis (dot) edu >`
 
+![Activity Diagram](https://github.com/RyanMarcus/DevelOPSToSQLServerCompiler/raw/master/doc/uml/workflow.png)
+![Sequence Diagram](https://github.com/RyanMarcus/DevelOPSToSQLServerCompiler/raw/master/doc/uml/sequence.png)
 
