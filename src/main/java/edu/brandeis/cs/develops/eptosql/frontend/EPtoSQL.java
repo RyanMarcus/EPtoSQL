@@ -27,7 +27,7 @@ import edu.brandeis.cs.develops.eptosql.translator.Relation;
  * 
  * This class contains two methods that could be used to access the compiler. The compile() method
  * is the preferred method of accessing the compiler, and can work asynchronously. The static method
- * syncCompile() provides a syncronous way of accessing the compiler that may be simpler.
+ * syncCompile() provides a synchronous way of accessing the compiler that may be simpler.
  * 
  * @author Ryan Marcus < ryan @ rmarcus.info >
  *
@@ -52,8 +52,9 @@ public class EPtoSQL {
 	 * @param iro the IR generation option
 	 * @param is the input stream to read from
 	 * @param out the output stream the resulting SQL will be written to
+	 * @return true if SQL was written, false if an error was thrown
 	 */
-	public void compile(CodeGenerationOption cgo, IROption iro, InputStream is, OutputStream out) {		
+	public boolean compile(CodeGenerationOption cgo, IROption iro, InputStream is, OutputStream out) {		
 		try {
 			Parser p = new Parser();
 			EP ep = (EP) p.parseStream(is);
@@ -79,7 +80,7 @@ public class EPtoSQL {
 					for (SemanticAnnotation semann : errors) {
 						System.err.println(semann.message);
 					}
-					return;
+					return false;
 				}
 			}
 		
@@ -93,13 +94,14 @@ public class EPtoSQL {
 			
 			os.flush();
 			os.close();
+			return true;
 			
 		} catch (ParserException e) {
 			System.err.println("Parser exception: " + e.getMessage());
-			System.exit(-1);
+			return false;
 		} catch (IRGenerationException e) {
 			System.err.println("IR generation exception: " + e.getMessage());
-			System.exit(-1);
+			return false;
 		}
 	}
 	
@@ -113,7 +115,10 @@ public class EPtoSQL {
 		PipedInputStream resultStream = new PipedInputStream();
 		PipedOutputStream writeTo = new PipedOutputStream(resultStream);
 		
-		compiler.compile(cgo, iro, in, writeTo);
+		if (!compiler.compile(cgo, iro, in, writeTo)) {
+			// error!
+			return "";
+		}
 		
 		
 		BufferedReader sc = new BufferedReader(new InputStreamReader(resultStream));
@@ -124,6 +129,7 @@ public class EPtoSQL {
 		}
 		
 		
+		writeTo.close();
 		return sb.toString();
 		
 	}
