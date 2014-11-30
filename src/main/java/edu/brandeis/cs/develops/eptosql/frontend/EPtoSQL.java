@@ -18,6 +18,8 @@ import edu.brandeis.cs.develops.eptosql.ir_generator.IRGenerator;
 import edu.brandeis.cs.develops.eptosql.parser.Parser;
 import edu.brandeis.cs.develops.eptosql.parser.parser.ParserException;
 import edu.brandeis.cs.develops.eptosql.parser.parser.AST.EP;
+import edu.brandeis.cs.develops.eptosql.semantic_analysis.SemanticAnalyzer;
+import edu.brandeis.cs.develops.eptosql.semantic_analysis.SemanticAnnotation;
 import edu.brandeis.cs.develops.eptosql.translator.ASTTranslator;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
 
@@ -70,6 +72,16 @@ public class EPtoSQL {
 				toGenerate = ir.decompose(r);
 			}
 			
+			SemanticAnalyzer sa = new SemanticAnalyzer();
+			for (Relation subR : toGenerate) {
+				List<SemanticAnnotation> errors = sa.analyze(subR);
+				if (!errors.isEmpty()) {
+					for (SemanticAnnotation semann : errors) {
+						System.err.println(semann.message);
+					}
+					return;
+				}
+			}
 		
 			for (Relation subr : toGenerate) {
 				if (cgo == CodeGenerationOption.NESTED) {
