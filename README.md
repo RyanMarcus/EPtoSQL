@@ -48,5 +48,5 @@ The following UML diagrams depict design decisions and implementation details.
 ![Sequence Diagram](https://github.com/RyanMarcus/DevelOPSToSQLServerCompiler/raw/master/doc/uml/sequence.png)
 
 
-<iframe src="//www.slideshare.net/slideshow/embed_code/42232529" width="476" height="400" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+[Presentation](http://www.slideshare.net/slideshow/embed_code/42232529)
 
