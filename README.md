@@ -2,7 +2,7 @@
 
 [ ![Codeship Status for RyanMarcus/DevelOPSToSQLServerCompiler](https://codeship.com/projects/e74702d0-4ccd-0132-de06-06f14de298ab/status?branch=master)](https://codeship.com/projects/47240)
 
-Compiles [DevelOPs](http://cs.brandeis.edu/~develops/) execution plans into SQL Server statements that force the server to use the specified plan.
+Compiles [DevelOPs](http://bit.ly/1w8OuVb) execution plans into SQL Server statements that force the server to use the specified plan.
 
 For example, given an execution plan like this (which represents a merge join of `table1` and `table2`):
 
