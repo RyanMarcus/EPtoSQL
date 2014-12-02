@@ -57,7 +57,9 @@ public class Cli {
    }
    String plan;
    while((sc.hasNextLine())) {
-	   plan = sc.nextLine();
+	   plan = sc.nextLine().trim();
+	   if (plan.length() == 0)
+		   continue;
 	   System.out.println(EPtoSQL.syncCompile(cgo, iro, plan));
    }
    sc.close();
