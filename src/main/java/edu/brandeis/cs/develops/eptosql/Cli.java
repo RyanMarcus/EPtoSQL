@@ -46,7 +46,7 @@ public class Cli {
     help();
    if (cmd.hasOption("nested"))
 	   cgo = CodeGenerationOption.NESTED;
-   if (cmd.hasOption("ir_disable"))
+   if (cmd.hasOption("disable_ir"))
 	   iro = IROption.DISABLE;
    if (cmd.hasOption("f")) {
 	   //log.log(Level.INFO, "Using cli argument -f=" + cmd.getOptionValue("f"));
