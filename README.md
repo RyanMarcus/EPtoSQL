@@ -47,3 +47,6 @@ The following UML diagrams depict design decisions and implementation details.
 ![Activity Diagram](https://github.com/RyanMarcus/DevelOPSToSQLServerCompiler/raw/master/doc/uml/workflow.png)
 ![Sequence Diagram](https://github.com/RyanMarcus/DevelOPSToSQLServerCompiler/raw/master/doc/uml/sequence.png)
 
+
+[Presentation](http://www.slideshare.net/slideshow/embed_code/42232529)
+
