@@ -11,7 +11,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 		CodeGenerationOption cgo = CodeGenerationOption.NESTED;
-		IROption iro = IROption.ENABLE;
+		IROption iro = IROption.DISABLE;
 		
 		Scanner sc = new Scanner(System.in);
 		String plan;
