@@ -1,10 +1,7 @@
 package edu.brandeis.cs.develops.eptosql;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.apache.commons.cli.BasicParser;
 import org.apache.commons.cli.CommandLine;
@@ -13,19 +10,12 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
-import edu.brandeis.cs.develops.eptosql.code_generator.SQLGenerator;
 import edu.brandeis.cs.develops.eptosql.frontend.CodeGenerationOption;
 import edu.brandeis.cs.develops.eptosql.frontend.EPtoSQL;
 import edu.brandeis.cs.develops.eptosql.frontend.IROption;
-import edu.brandeis.cs.develops.eptosql.parser.Parser;
-import edu.brandeis.cs.develops.eptosql.parser.parser.ParserException;
-import edu.brandeis.cs.develops.eptosql.parser.parser.AST.ASTNode;
-import edu.brandeis.cs.develops.eptosql.parser.parser.AST.EP;
-import edu.brandeis.cs.develops.eptosql.translator.ASTTranslator;
-import edu.brandeis.cs.develops.eptosql.translator.Relation;
 
 public class Cli {
- private static final Logger log = Logger.getLogger(Cli.class.getName());
+ //private static final Logger log = Logger.getLogger(Cli.class.getName());
  private String[] args = null;
  private Options options = new Options();
 
@@ -36,10 +26,10 @@ public class Cli {
   options.addOption("h", "help", false, "show help.");
   options.addOption("f", "filename", true, "file to translate.");
   options.addOption("nested", "nested", false, "if included, generate nested code");
-  options.addOption("ir_disable", "disable ir", false, "if included, disable ir");
+  options.addOption("disable_ir", "disable_ir", false, "if included, disable ir");
  }
 
- public void parse() throws FileNotFoundException {
+ public void parse() throws IOException {
   CommandLineParser parser = new BasicParser();
   
   CodeGenerationOption cgo = CodeGenerationOption.UNNESTED;
@@ -68,9 +58,7 @@ public class Cli {
    String plan;
    while((sc.hasNextLine())) {
 	   plan = sc.nextLine();
-	   System.out.println(plan);
-	   EPtoSQL ets = new EPtoSQL();
-	   ets.compile(cgo, iro, new ByteArrayInputStream(plan.getBytes()), System.out);
+	   System.out.println(EPtoSQL.syncCompile(cgo, iro, plan));
    }
    sc.close();
  }
@@ -80,7 +68,7 @@ public class Cli {
  private void help() {
   HelpFormatter formatter = new HelpFormatter();
 
-  formatter.printHelp("Main", options);
+  formatter.printHelp("eptosql.jar", options);
   System.exit(0);
  }
 }
