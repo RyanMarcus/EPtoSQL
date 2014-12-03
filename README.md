@@ -1,5 +1,7 @@
 # DevelOPS to SQLServer compiler
 
+## What?
+
 [ ![Codeship Status for RyanMarcus/DevelOPSToSQLServerCompiler](https://codeship.com/projects/e74702d0-4ccd-0132-de06-06f14de298ab/status?branch=master)](https://codeship.com/projects/47240)
 
 Compiles [DevelOPs](http://bit.ly/1w8OuVb) execution plans into SQL Server statements that force the server to use the specified plan.
@@ -29,6 +31,12 @@ Our compiler will produce SQL like this:
 
     SELECT * INTO #temp1 FROM table1 table_inner WHERE attr1 = "value" OPTION(FORCE ORDER);
     SELECT * INTO #temp2 FROM #temp1  INNER MERGE JOIN table2 table_right ON (attr1 = attr2) OPTION(FORCE ORDER);
+
+## Why?
+
+This compiler allows query optimizer developers to test the performance of queries created by their optimizers against the SQL Server execution engine.
+
+## Who?
 
 Project members:
 
