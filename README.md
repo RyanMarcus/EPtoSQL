@@ -1,10 +1,13 @@
-# DevelOPS to SQLServer compiler
+# A DSL for Physical Plans
 
 ## What?
 
 [ ![Codeship Status for RyanMarcus/DevelOPSToSQLServerCompiler](https://codeship.com/projects/e74702d0-4ccd-0132-de06-06f14de298ab/status?branch=master)](https://codeship.com/projects/47240)
 
-Compiles [DevelOPs](http://bit.ly/1w8OuVb) execution plans into SQL Server statements that force the server to use the specified plan.
+![GNU GPLv3](http://www.gnu.org/graphics/gplv3-127x51.png)
+
+
+Compiles execution plans written in the [DevelOPs](http://bit.ly/1w8OuVb) execution plan DSL into SQL statements that force SQL Server to use the specified plan.
 
 For example, given an execution plan like this (which represents a merge join of `table1` and `table2`):
 
