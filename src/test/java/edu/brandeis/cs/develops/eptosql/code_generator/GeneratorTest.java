@@ -68,12 +68,36 @@ public class GeneratorTest {
     }
     
     @Test
+    public void test3a() throws ParserException {
+    	Parser p = new Parser();
+    	EP ep = (EP) p.parseString("PSELECT(n_name = 'ASIA', PTABLE(N))");
+		ASTTranslator astt = new ASTTranslator();
+		Relation r = astt.parse(ep);
+        String SQL = SQLGenerator.createNestedSQL(r);
+
+        assertTrue(SQL.indexOf("SELECT") != -1);
+        assertTrue(SQL.indexOf("ASIA") != -1);
+    }
+    
+    @Test
     public void test4() throws ParserException {
     	Parser p = new Parser();
     	EP ep = (EP) p.parseString("PSELECT(n_name = 'ASIA', PTABLE(N))");
 		ASTTranslator astt = new ASTTranslator();
 		Relation r = astt.parse(ep);
         String SQL = SQLGenerator.createUnnestedSQL(r);
+
+        assertTrue(SQL.indexOf("SELECT") != -1);
+        assertTrue(SQL.indexOf("ASIA") != -1);
+    }
+    
+    @Test
+    public void test4a() throws ParserException {
+    	Parser p = new Parser();
+    	EP ep = (EP) p.parseString("PSELECT(n_name = 'ASIA', PTABLE(N))");
+		ASTTranslator astt = new ASTTranslator();
+		Relation r = astt.parse(ep);
+        String SQL = SQLGenerator.createNestedSQL(r);
 
         assertTrue(SQL.indexOf("SELECT") != -1);
         assertTrue(SQL.indexOf("ASIA") != -1);
@@ -95,8 +119,22 @@ public class GeneratorTest {
         assertTrue(SQL.indexOf("s_nationkey") != -1);
         assertTrue(SQL.indexOf("ps_suppkey") != -1);
 
+    }
+    
+    @Test
+    public void test5a() throws ParserException {
+    	Parser p = new Parser();
+    	EP ep = (EP) p.parseString("PNLJOIN(s_nationkey = n_nationkey, PMJOIN(ps_suppkey = s_suppkey, PTABLE(PS), PTABLE(S)), PSELECT(n_name = 'ASIA', PTABLE(N)))");
+		ASTTranslator astt = new ASTTranslator();
+		Relation r = astt.parse(ep);
+        String SQL = SQLGenerator.createNestedSQL(r);
 
-
+        assertTrue(SQL.indexOf("SELECT") != -1);
+        assertTrue(SQL.indexOf("ASIA") != -1);
+        assertTrue(SQL.indexOf("LOOP") != -1);
+        assertTrue(SQL.indexOf("MERGE") != -1);
+        assertTrue(SQL.indexOf("s_nationkey") != -1);
+        assertTrue(SQL.indexOf("ps_suppkey") != -1);
 
     }
 }

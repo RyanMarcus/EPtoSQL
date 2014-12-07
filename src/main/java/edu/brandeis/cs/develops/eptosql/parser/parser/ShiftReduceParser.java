@@ -108,6 +108,7 @@ public class ShiftReduceParser {
 				toPush.string = stack.pop().getToken().getContent();
 
 				if (stack.isEmpty()
+						|| stack.peek().getToken() == null
 						|| stack.peek().getToken().getType() != TokenType.LP) {
 					throw new ParserException("Was expecting LP");
 				}
