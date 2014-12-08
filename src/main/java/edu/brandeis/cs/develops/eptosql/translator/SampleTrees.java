@@ -68,4 +68,19 @@ public class SampleTrees {
             Relation full = new Join(emp_employees, emp_dep, "yee_employee_id=etd_employee_id", "PHJOIN");
             return full;
         }
+        
+        public static Relation StoreProductDepartments(){
+            Relation stores = new Table("stores");
+            Relation stores_where = new Selection(stores, "LOWER(store_name) LIKE '%b[a-z]d%'");
+            Relation departments = new Table("departments");
+            Relation products = new Table("products");
+            Relation stores_to_products = new Table ("stores_to_products");
+            Relation stores_s2p_join = new Join (stores_where, stores_to_products, "store_id=s2p_store_id", "PHJOIN");
+            Relation stores_products_join = new Join(stores_s2p_join, products, "product_id=s2p_product_id", "PHJOIN");
+            Relation all_joins= new Join(stores_products_join, departments, "department_id=product_department_id", "PHJOIN");
+            Relation full = new Selection(all_joins, "LOWER(department_name) = 'test department 1'");;
+           
+            return full;
+        }
+
 }
