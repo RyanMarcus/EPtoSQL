@@ -45,6 +45,15 @@ You can download a pre-built JAR file [here](http://bgodby.info/eptosql.jar.zio)
 
     java -jar eptosql.jar --help
     
+To simply translate from standard in, use:
+
+    java -jar eptosql.jar
+    
+To translate from a file, use:
+
+    java -jar eptosql.jar -f FILE
+    
+Happy compiling. :)
 
 ## Who?
 
