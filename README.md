@@ -41,7 +41,7 @@ This compiler allows query optimizer developers to test the performance of queri
 
 ## How?
 
-You can download a pre-built JAR file [here](http://bgodby.info/eptosql.jar.zio). To run it, use:
+You can download a pre-built JAR file [here](http://bgodby.info/eptosql.zip). To run it, use:
 
     java -jar eptosql.jar --help
     
