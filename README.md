@@ -39,6 +39,13 @@ Our compiler will produce SQL like this:
 
 This compiler allows query optimizer developers to test the performance of queries created by their optimizers against the SQL Server execution engine.
 
+## How?
+
+You can download a pre-built JAR file [here](http://bgodby.info/eptosql.jar.zio). To run it, use:
+
+    java -jar eptosql.jar --help
+    
+
 ## Who?
 
 Project members:
