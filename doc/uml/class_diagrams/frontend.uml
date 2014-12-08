@@ -1,0 +1,17 @@
+@startuml
+package frontend {
+    enum IROption {
+     ENABLE
+     DISABLE
+    }
+    enum CodeGenerationOption {
+     NESTED
+     UNNESTED
+    }
+    class EPtoSQL {
+     +boolean compile(CodeGenerationOption cgo, IROption iro, InputStream is, OutputStream out)
+     +{static} String syncCompile(CodeGenerationOption cgo, IROption iro, String executionPlan)
+     +{static} void main(String[] args)
+   }
+}
+@enduml

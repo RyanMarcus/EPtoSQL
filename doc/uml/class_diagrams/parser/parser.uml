@@ -1,0 +1,104 @@
+@startuml
+scale 2000 width
+package "parser" {
+    class ParserException {
+        -{static} final long serialVersionUID = 1
+        +ParserException(String string)
+    }
+    class ShiftReduceParser {
+        -Deque<ASTNode> stack
+        +ShiftReduceParser()
+        +ASTNode parseTokens(Iterator<Token> tokens)
+    }
+    package "AST" {
+        class ASTNode {
+         -Token t
+         +boolean isTokenType(TokenType type)
+         +Token getToken()
+         +String toString()
+        }
+        class DOUBLE_COMMA_EXPR {
+         +expr1
+         +expr2
+         +DOUBLE_COMMA_EXPR()
+         +COMMA_EXPR getExpr1()
+         +COMMA_EXPR getExpr2()
+        }
+        class COMMA_EXPR {
+         +expr
+         +COMMA_EXPR()
+         +EXPR getExpr()
+        }
+        class EXPR {
+         +selection
+         +join
+         +table
+         +Expr()
+         +boolean IsSelection()
+         +boolean IsJoin()
+         +boolean IsTable()
+         +SELECTION getSelection()
+         +JOIN getJoin()
+         +TABLE getTable()
+        }
+        class EP {
+         +expr
+         +EP()
+         +EXPR getEXPR()
+        }
+        class JOIN_TYPE {
+         +String type
+         +JOIN_TYPE()
+        }
+        class JOIN {
+         +paren_string_expr_expr
+         +join_type
+         +JOIN()
+         +EXPR getExpr1()
+         +EXPR getExpr2()
+         +String getType()
+         +String getPredicate()
+        }
+        class PAREN_STRING_EXPR_EXPR {
+         +string
+         +double_comma_expr
+         +PAREN_STRING_EXPR_EXPR()
+         +String getString()
+         +EXPR getSubExpr1()
+         +EXPR getSubExpr2()
+        }
+        class PAREN_STRING_EXPR {
+         +string
+         +expr
+         +PAREN_STRING_EXPR()
+         +COMMA_EXPR getExpr()
+        }
+        class PAREN_STRING {
+         +string
+         +PAREN_STRING()
+        }
+        class SELECTION {
+         +paren_string_expr
+         +SELECTION()
+         +String getPredicate()
+         +EXPR getBaseEXPR()
+        }
+        class TABLE {
+         +paren_string
+         +TABLE()
+         +String getName()
+        }
+        ASTNode <|-- COMMA_EXPR
+        ASTNode <|-- DOUBLE_COMMA_EXPR
+        ASTNode <|-- EP
+        ASTNode <|-- EXPR
+        ASTNode <|-- JOIN
+        ASTNode <|-- PAREN_STRING_EXPR_EXPR
+        ASTNode <|-- PAREN_STRING_EXPR
+        ASTNode <|-- PAREN_STRING
+        ASTNode <|-- SELECTION
+        ASTNode <|-- TABLE
+        JOIN_TYPE .. JOIN
+    }
+}
+@enduml

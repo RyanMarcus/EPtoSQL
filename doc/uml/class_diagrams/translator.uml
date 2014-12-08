@@ -1,0 +1,69 @@
+@startuml
+package translator {
+    abstract class Relation {
+        +Set<Relation> getChildren()
+    }
+    class ExpressionParser {
+     +Relation parseExpr(EXPR expr)
+     +Relation parseTable(EXPR expr)
+     +Relation parseSelection(EXPR expr)
+     +Relation parseJoin(EXPR expr)
+    }
+    class ASTTranslator {
+     +Relation parse(EP ep)
+    }
+    enum JoinType {
+     PMJOIN
+     PNLJOIN
+     PHJOIN
+    }
+    class Join {
+     -leftChild
+     -rightChild
+     -predicate
+     -joinType
+     -into
+     +Join(Relation leftChild, Relation rightChild, String predicate, String joinType)
+     +Relation getLeftChild()
+     +void setLeftChild(Relation leftChild)
+     +Relation getRightChild()
+     +void setRightChild(Relation rightChild)
+     +String getPredicate()
+     +void setPredicate(String predicate)
+     +JoinType getJoinType()
+     +void setJoinType(String joinType)
+     +Boolean hasAttributes(JoinType joinType, String predicate)
+     +String toString()
+     +Set<Relation> getChildren()
+    }
+    class Table {
+     -name
+     +Table(String name)
+     +String getName()
+     +void setName(String name)
+     +Boolean hasAttributes(String name)
+     +String toString()
+     +Set<Relation> getChildren()
+    }
+    class Selection {
+     -leftChild
+     -predicate
+     -into
+     +Selection(Relation leftchild, String predicate)
+     +Relation getChild()
+     +void setChild(Relation leftChild)
+     +String getPredicate()
+     +void setPredicate(String predicate)
+     +Boolean hasAttributes(String predicate)
+     +String getInto()
+     +void setInto(String into)
+     +String toString()
+     +Set<Relation> getChildren()
+    }
+
+    Relation <|-- Table
+    Relation <|-- Selection
+    Relation <|-- Join
+    Join .. JoinType
+}
+@enduml

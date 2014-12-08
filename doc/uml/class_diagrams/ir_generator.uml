@@ -1,0 +1,14 @@
+@startuml
+package ir_generator {
+    class IRGenerator {
+     -tempCounter
+     -List<Relation> emit
+     +synchronized List<Relation> decompose(Relation r)
+     +String decomposeSubtree(Relation r)
+    }
+    class IRGenerationException {
+     -{static} final long serialVersionuid = 1L
+     +IRGenerationException(String string)
+    }
+}
+@enduml

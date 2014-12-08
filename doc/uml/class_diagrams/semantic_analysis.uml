@@ -1,0 +1,24 @@
+@startuml
+package semantic_analysis {
+    class SemanticAnnotation {
+     +message
+     +SemanticAnnotation(String s)
+    }
+    class SemanticAnalyzer {
+     +List<SemanticAnnotation> analyze(Relation r)
+     +List<SemanticAnnotation> joinSelectionCheck(Relation r)
+     +List<SemanticAnnotation> selectionJoinCheck(Relation r)
+     +boolean shareAttributes(String predicate1, String predicate2)
+     +{static} void main(String[] args)
+    }
+    class Warning {
+     +Warning(String s)
+    }
+    class Error {
+     +Error(String s)
+    }
+    class SemanticAnalyzer
+    SemanticAnnotation <|-- Error
+    SemanticAnnotation <|-- Warning
+}
+@enduml

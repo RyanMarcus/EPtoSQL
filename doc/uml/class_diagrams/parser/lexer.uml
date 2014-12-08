@@ -1,0 +1,43 @@
+@startuml
+package "lexer" {
+    class Lexer {
+     -Deque<Character> charStack
+     -Lexer(InputStream s)
+     +Lexer createLexerForString(String s)
+     +Lexer createLexerForInputStream(InputStream s)
+    }
+    class Token {
+     -TokenType type 
+     -String content 
+    }
+    class Token {
+     -TokenType type 
+     -String content
+     +Token(TokenType t)
+     +String getContent()
+     +TokenType getType()
+     +String toString() 
+    }
+    enum TokenType {
+     LP
+     RP
+     PTABLE
+     PSELECT
+     PMJOIN
+     PNLJOIN
+     PHJOIN
+     STRING
+     COMMA
+    }
+    package "util" {
+     class CharacterInputStreamStack {
+      -BufferedReader br
+      -Deque<Character> buffer
+      -{static} final int TO_READ = 10
+      +CharacterInputStreamStack(InputStream s)
+      +Character push(Character e)
+      +Character pop()
+     }
+    }
+}
+@enduml
