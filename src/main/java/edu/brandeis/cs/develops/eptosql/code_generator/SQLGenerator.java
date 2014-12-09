@@ -23,6 +23,7 @@ package edu.brandeis.cs.develops.eptosql.code_generator;
 import edu.brandeis.cs.develops.eptosql.translator.Join;
 import edu.brandeis.cs.develops.eptosql.translator.JoinType;
 import edu.brandeis.cs.develops.eptosql.translator.Relation;
+import edu.brandeis.cs.develops.eptosql.translator.SampleTrees;
 import edu.brandeis.cs.develops.eptosql.translator.Selection;
 import edu.brandeis.cs.develops.eptosql.translator.Table;
 /**
@@ -68,14 +69,12 @@ public class SQLGenerator {
     private static SQLDto unnestedSQL(Join relation) {
         SQLDto leftDto = unnestedSQL(relation.getLeftChild());
         SQLDto rightDto = unnestedSQL(relation.getRightChild());
-        if (relation.getLeftChild() instanceof Table) {
+        if (relation.getLeftChild() instanceof Table && relation.getRightChild() instanceof Table) {
             return easyJoin(relation, leftDto, rightDto);
-        } else if (relation.getRightChild() instanceof Table) {
-            return easyJoin(relation, rightDto, leftDto);
         } else {
-            if (relation.getInto() != null)
+            if (relation.getInto() != null){
             	leftDto.setInto(relation.getInto());
-        	
+            }
             leftDto.appendJoin(" ");
             leftDto.appendJoin(evaluateJoinType(relation.getJoinType()));
             leftDto.appendJoin(" (");
@@ -90,22 +89,22 @@ public class SQLGenerator {
         
     }
 
-    private static SQLDto easyJoin(Join relation, SQLDto simpleDto, SQLDto complexDto) {
-        complexDto.appendJoin(" ");
-        complexDto.appendJoin(evaluateJoinType(relation.getJoinType()));
-        complexDto.appendJoin(" ");
-        complexDto.appendJoin(simpleDto.getFromClause().toString());
-        complexDto.appendJoin(" ON ");
-        if (simpleDto.getWhereClause().length() > 0) {
-            complexDto.appendJoin(simpleDto.getWhereClause().toString());
-            complexDto.appendJoin(" AND ");
+    private static SQLDto easyJoin(Join relation, SQLDto leftDto, SQLDto rightDto) {
+        rightDto.appendJoin(" ");
+        rightDto.appendJoin(evaluateJoinType(relation.getJoinType()));
+        rightDto.appendJoin(" ");
+        rightDto.appendJoin(leftDto.getFromClause().toString());
+        rightDto.appendJoin(" ON ");
+        if (leftDto.getWhereClause().length() > 0) {
+            rightDto.appendJoin(leftDto.getWhereClause().toString());
+            rightDto.appendJoin(" AND ");
         }
-        complexDto.appendJoin(relation.getPredicate());
+        rightDto.appendJoin(relation.getPredicate());
         
         if (relation.getInto() != null)
-        	complexDto.setInto(relation.getInto());
+        	rightDto.setInto(relation.getInto());
         
-        return complexDto;
+        return rightDto;
     }
 
     private static SQLDto unnestedSQL(Selection relation) {
@@ -180,5 +179,11 @@ public class SQLGenerator {
             default:
                 return "INNER MERGE JOIN";
         }
+    }
+    
+    public static void main(String[] args){
+        Relation test = SampleTrees.StoreProductDepartments();
+        String SQL = SQLGenerator.createUnnestedSQL(test);
+        System.out.println(SQL);
     }
 }
